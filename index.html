@@ -1195,8 +1195,8 @@ var _hmt = _hmt || [];
             
             <div class="report-section">
                 <h3>📊 第一部分：深度心理分析</h3>
-                <h4>你的核心特质：深度I人</h4>
-                <p id="coreAnalysis">你的能量主要来自内心世界。你需要独处时间来充电，大型社交场合会让你感到疲惫。但这不代表你不喜欢社交，而是你更喜欢有深度的一对一交流。你的思考是深入的，观察是细腻的，这让你在需要专注和深度的领域表现出色。</p>
+<h4>你的核心特质：<span id="coreTraitTitle">深度I人</span></h4>
+                <p id="coreAnalysis">你的能量主要来自内心世界。你需要独处时间来充电，大型社交场合会让你感到疲惫。但这不代表你不喜欢社交，而是你更喜欢有深度的一对一交流。你的思考是深入的，观察是细腻的，这让你在需要专注和深度的领域表现出色。</p>
                 
                 <h4>你的能量模式</h4>
                 <p id="energyPattern">你的社交能量像电池一样，需要定期充电。独处、阅读、思考、创作都是你充电的方式。过度社交会让你的能量消耗殆尽，表现为焦虑、疲惫、想要逃离。理解这一点很重要：这不是缺陷，而是你的天性。</p>
@@ -1328,7 +1328,7 @@ var _hmt = _hmt || [];
             </div>
             
             <div class="report-section">
-                <h3>⚠️ I人的避坑指南</h3>
+   <h3>⚠️ <span id="dosDontsTitle">I人</span>的避坑指南</h3>
                 <div class="dos-donts">
                     <div class="donts-card">
                         <h4>❌ 千万别做的3件事</h4>
@@ -2191,7 +2191,7 @@ dos: [
         
         document.getElementById('fullIeIcon').textContent = result.icon;
         document.getElementById('fullIeType').textContent = `${result.subtype} (得分: ${result.totalScore}/150)`;
-        
+        document.getElementById('coreTraitTitle').textContent = result.subtype;   
 // 更新第一部分
         document.getElementById('coreAnalysis').textContent = reportData.desc; // 亚型的核心描述
         
@@ -2255,6 +2255,8 @@ dos: [
             li.innerHTML = `<strong>${i+1}. ${d.title}</strong><br>${d.desc}`;
             dosList.appendChild(li);
         });
+         const dosDontsType = result.totalScore < 90 ? 'I人' : 'E人';
+         document.getElementById('dosDontsTitle').textContent = dosDontsType;
         
         drawRadarChart('fullRadarChart', result.dimensionScores);
         window.scrollTo(0, 0);
@@ -2405,6 +2407,7 @@ dos: [
 </script>
 </body>
 </html>
+
 
 
 
