@@ -1326,27 +1326,18 @@ var _hmt = _hmt || [];
                 </div>
             </div>
             
-            <div class="report-section">
-                <h3>⚠️ I人的避坑指南</h3>
-                <div class="dos-donts">
-                    <div class="donts-card">
-                        <h4>❌ 千万别做的3件事</h4>
-                        <ul style="list-style: none; padding: 0;" id="dontsList">
-                            <li style="padding: 10px 0; border-bottom: 1px solid #FFCDD2;"><strong>1. 强迫自己变成E人</strong><br>这会耗尽你的能量，造成长期焦虑。</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #FFCDD2;"><strong>2. 过度社交</strong><br>没有给自己留充电时间，会导致burnout。</li>
-                            <li style="padding: 10px 0;"><strong>3. 觉得自己有问题</strong><br>I人不是缺陷，而是一种天性和优势。</li>
-                        </ul>
-                    </div>
-                    <div class="dos-card">
-                        <h4>✅ 一定要做的3件事</h4>
-                        <ul style="list-style: none; padding: 0;" id="dosList">
-                            <li style="padding: 10px 0; border-bottom: 1px solid #C8E6C9;"><strong>1. 保护独处时间</strong><br>每天至少1小时，这是你的充电时间。</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #C8E6C9;"><strong>2. 找到深度连接</strong><br>不需要很多朋友，但要有几个真正理解你的人。</li>
-                            <li style="padding: 10px 0;"><strong>3. 接纳自己</strong><br>I人有独特的优势：专注、深度、观察力。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          <div class="report-section">
+    <h3 id="guidanceTitle">⚠️ I人的避坑指南</h3> <div class="dos-donts">
+        <div class="donts-card">
+            <h4 id="dontsCardTitle">❌ 千万别做的3件事</h4> <ul style="list-style: none; padding: 0;" id="dontsList"> 
+            </ul>
+        </div>
+        <div class="dos-card">
+            <h4 id="dosCardTitle">✅ 一定要做得3件事</h4> <ul style="list-style: none; padding: 0;" id="dosList">
+            </ul>
+        </div>
+    </div>
+</div>
             
             <button class="btn btn-secondary" onclick="location.reload()">重新测评</button>
         </div>
@@ -2294,7 +2285,26 @@ if (reportData.communication && reportData.communication.length > 0) {
             li.innerHTML = `<strong>${i+1}. ${d.title}</strong><br>${d.desc}`;
             dosList.appendChild(li);
         });
-        
+        const isIntrovert = result.totalScore < 90; // 以 90 分为中线判断 I/E 倾向
+    const guidanceType = isIntrovert ? 'I人' : 'E人';
+    const guidanceTitleText = isIntrovert ? '避坑指南' : '成长指南';
+
+    // 1. 更新大标题 (I人的避坑指南 -> E人的成长指南)
+    const guidanceTitleElement = document.getElementById('guidanceTitle');
+    if (guidanceTitleElement) {
+        guidanceTitleElement.textContent = `⚠️ ${guidanceType}的${guidanceTitleText}`;
+    }
+
+    // 2. 更新Dos/Donts卡片标题
+    const dontsCardTitleElement = document.getElementById('dontsCardTitle');
+    if (dontsCardTitleElement) {
+        dontsCardTitleElement.textContent = `❌ ${isIntrovert ? '千万别做的' : '需要避免的'}3件事`;
+    }
+
+    const dosCardTitleElement = document.getElementById('dosCardTitle');
+    if (dosCardTitleElement) {
+        dosCardTitleElement.textContent = `✅ ${isIntrovert ? '一定要做的' : '建议拥抱的'}3件事`;
+    }
         drawRadarChart('fullRadarChart', result.dimensionScores);
         window.scrollTo(0, 0);
     }
@@ -2444,6 +2454,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
