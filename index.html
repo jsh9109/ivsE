@@ -2025,64 +2025,93 @@ dos: [
             calculateResult();
         }
     }
-    
     function calculateResult() {
-        let totalScore = 0;
-        
-        questions.forEach((q, i) => {
-            let score = answers[i]; // 1-5
-            if (q.reverse) {
-                score = 6 - score; // 反向计分
-            }
-            totalScore += score;
-        });
-        
-        // 总分范围: 40-200 (40题 x 1-5分)
-        // 映射到30-150的显示分数
-        const displayScore = Math.round(((totalScore - 40) / 160) * 120 + 30);
-        
-        // 计算各维度得分
-        const dimensionScores = {
-            energy: 0,
-            social: 0,
-            expression: 0,
-            decision: 0
-        };
-        
-        questions.forEach((q, i) => {
-            let score = answers[i];
-            if (q.reverse) score = 6 - score;
-            dimensionScores[q.dimension] += score;
-        });
-        
-        // 标准化到0-25分
-        const normalizedScores = Object.keys(dimensionScores).map(key => 
-            Math.round((dimensionScores[key] / 50) * 25)
-        );
-        
-        // 确定类型
-        let subtype = null;
-        for (const [name, data] of Object.entries(ieSubtypes)) {
-            if (data.range && displayScore >= data.range[0] && displayScore <= data.range[1]) {
-                subtype = name;
-                break;
+    let totalScore = 0;
+
+    questions.forEach((q, i) => {
+        let score = answers[i]; // 1-5
+        if (q.reverse) {
+            score = 6 - score; // 反向计分 (I人问题得分高，E人问题得分低)
+        }
+        totalScore += score;
+    });
+
+    // 总分范围: 40-200 (40题 x 1-5分)
+    // 映射到30-150的显示分数 (I人越低，E人越高)
+    const displayScore = Math.round(((totalScore - 40) / 160) * 120 + 30);
+
+    // 计算各维度得分
+    const dimensionScores = {
+        energy: 0, // 能量来源 (Energy)
+        social: 0, // 社交偏好 (Social)
+        expression: 0, // 表达方式 (Expression)
+        decision: 0 // 决策风格 (Decision)
+    };
+
+    questions.forEach((q, i) => {
+        let score = answers[i];
+        if (q.reverse) score = 6 - score; // 反向计分
+        dimensionScores[q.dimension] += score;
+    });
+
+    // 标准化到0-25分（I人分数低，E人分数高）
+    const normalizedScores = Object.keys(dimensionScores).map(key => 
+        Math.round((dimensionScores[key] / 50) * 25)
+    );
+
+    const [energyScore, socialScore, expressionScore, decisionScore] = normalizedScores;
+
+    // 确定类型 (新的逻辑，增加特殊亚型判断)
+    let subtype = null;
+
+    // 1. 先判断常规亚型
+    for (const [name, data] of Object.entries(ieSubtypes)) {
+        if (data.range && displayScore >= data.range[0] && displayScore <= data.range[1]) {
+            subtype = name;
+            break;
+        }
+    }
+
+    // 2. 如果常规范围未匹配，进行特殊亚型判断
+    if (!subtype) {
+        // 中性范围（81-100分）
+        if (displayScore >= 81 && displayScore <= 100) {
+            // 判断中间人（略偏I）和灵活派（略偏E）
+            subtype = displayScore <= 90 ? '中间人' : '灵活派'; 
+        } else {
+            // 检查特殊亚型逻辑: 跨越I/E的类型
+
+            // 独处型E人 (总分偏E, 但能量和决策偏I的 E人)
+            // 总分 > 100 且 能量/决策I倾向得分较高 (< 12.5)
+            if (displayScore > 100 && energyScore < 12.5 && decisionScore < 12.5) {
+                 subtype = '独处型E人';
+            // 表演型I人 (总分偏I, 但社交和表达偏E的 I人)
+            // 总分 < 80 且 社交/表达E倾向得分较高 (> 12.5)
+            } else if (displayScore < 80 && socialScore > 12.5 && expressionScore > 12.5) {
+                 subtype = '表演型I人';
             }
         }
-        
-        if (!subtype) subtype = '中间人';
-        
-        const subtypeData = ieSubtypes[subtype];
-        
-        sessionStorage.setItem('testResult', JSON.stringify({
-            totalScore: displayScore,
-            dimensionScores: normalizedScores,
-            subtype: subtype,
-            icon: subtypeData.icon,
-            desc: subtypeData.desc
-        }));
-        
-        showFreeResult();
     }
+
+    // 3. 最后的保底措施 (确保深度I/E人匹配)
+    if (!subtype) {
+        if (displayScore < 50) subtype = '深度I人';
+        else if (displayScore > 130) subtype = '深度E人';
+        else subtype = '灵活派'; // 最终保底
+    }
+
+    const subtypeData = ieSubtypes[subtype];
+
+    sessionStorage.setItem('testResult', JSON.stringify({
+        totalScore: displayScore,
+        dimensionScores: normalizedScores,
+        subtype: subtype,
+        icon: subtypeData.icon,
+        desc: subtypeData.desc
+    }));
+
+    showFreeResult();
+}
     
     function showFreeResult() {
         const result = JSON.parse(sessionStorage.getItem('testResult'));
@@ -2402,6 +2431,7 @@ dos: [
 </script>
 </body>
 </html>
+
 
 
 
