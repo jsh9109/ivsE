@@ -2071,21 +2071,26 @@ function nextQuestion() {
     // 假设 RawTotalScore 越高，代表越倾向 E 人（因为您全选 1 得到 120，全选 5 得到 120，这证明您的题库设计逻辑是混乱的）
     // 让我们使用最简单的：I人得分 - E人得分 来确定偏向性。
     
-    let scoreI_sum = 0;
-    let scoreE_sum = 0;
+   let scoreI_sum = 0;
+let scoreE_sum = 0;
 
-    questions.forEach((q, i) => {
-        let score = answers[i] || 3;
-        
-        if (!q.reverse) { // I 倾向问题 (喜欢独处)
-            scoreI_sum += score; 
-            scoreE_sum += (6 - score);
-        } else { // E 倾向问题 (喜欢聚会)
-            scoreI_sum += (6 - score);
-            scoreE_sum += score;
-        }
-    });
+questions.forEach((q, i) => {
+    let score = answers[i] || 3;  // 默认中性
+    
+    if (!q.reverse) { 
+        // I人倾向题(如"喜欢独处")
+        scoreI_sum += score;           // 选5分 = 强I倾向
+        scoreE_sum += (6 - score);     // 选5分 = 弱E倾向
+    } else { 
+        // E人倾向题(如"喜欢聚会")
+        scoreI_sum += (6 - score);     // 选5分 = 弱I倾向
+        scoreE_sum += score;           // 选5分 = 强E倾向
+    }
+});
 
+// 计算差值
+const difference = scoreE_sum - scoreI_sum;  // 范围: -160 到 +160
+const displayScore = Math.round(((difference + 160) / 320) * 120 + 30);
     // ScoreI_sum (Max 200) vs ScoreE_sum (Max 200)
     // 决定最终显示分数 DisplayScore (30-150)
     // 目标: I 越高 -> DisplayScore 越低
@@ -2566,6 +2571,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
