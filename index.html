@@ -2016,43 +2016,113 @@ dos: [
             calculateResult();
         }
     }
-    function calculateResult() {
-    let totalScore = 0;
-
+   function calculateResult() {
+    let totalI_Score = 0; // 计分全部转向 I 维度
+    let totalE_Score = 0; // 计分全部转向 E 维度 (暂不使用，但保留逻辑)
+    
+    // I 题和 E 题的总数为 40，总分范围 40-200，中线 120
+    
     questions.forEach((q, i) => {
-        let score = answers[i]; // 1-5
-        if (q.reverse) {
-            score = 6 - score; // 反向计分 (I人问题得分高，E人问题得分低)
+        let score = answers[i]; // 原始选择分数 1-5
+        
+        // 确保答案已经被选择
+        if (score === 0) {
+            score = 3; // 默认中性分 3
         }
-        totalScore += score;
+
+        // 1. 计算 I 人得分: I 倾向的题，得分越高越 I
+        if (!q.reverse) {
+            totalI_Score += score; // 1 (不像) 到 5 (很像)
+        } else {
+            totalI_Score += (6 - score); // 5 (不像) 到 1 (很像)
+        }
+        
+        // 2. 计算 E 人得分 (反之): E 倾向的题，得分越高越 E
+        if (q.reverse) {
+            totalE_Score += score; // 1 (不像) 到 5 (很像)
+        } else {
+            totalE_Score += (6 - score); // 5 (不像) 到 1 (很像)
+        }
     });
 
-    // 总分范围: 40-200 (40题 x 1-5分)
-    // 映射到30-150的显示分数 (I人越低，E人越高)
-    const displayScore = Math.round(((totalScore - 40) / 160) * 120 + 30);
-
-    // 计算各维度得分
+    // 重新设计总分：我们使用 I/E 差值来拉开差距，并映射到 30-150 的显示范围
+    // I/E 差值范围：(40*1) - (40*5) = -160 到 (40*5) - (40*1) = +160
+    
+    const maxScore = 200; // I/E 都是 40*5
+    const minScore = 40; // I/E 都是 40*1
+    
+    // 使用 I 人得分和 E 人得分的比重来计算一个更明显的总分 (范围 40 - 200)
+    // totalScore 接近 maxScore 时为 E 人，接近 minScore 时为 I 人
+    const finalTotalScore = totalE_Score + (200 - totalI_Score); // 简化公式：高 E 人得分 + 低 I 人得分
+    
+    // 映射到 30-150 的显示分数：(分数 - 最小值) / (总范围) * (目标范围) + 目标最小值
+    // 实际总分范围是 40-200 (共 160)
+    // 目标显示范围是 30-150 (共 120)
+    
+    const displayScore = Math.round(((finalTotalScore - 40) / 160) * 120 + 30); 
+    
+    // ... (后续的维度得分和亚型分类逻辑不变)
+    
+    // 计算各维度得分 (使用 totalI_Score 和 totalE_Score 来计算，以拉开维度差距)
     const dimensionScores = {
-        energy: 0, // 能量来源 (Energy)
-        social: 0, // 社交偏好 (Social)
-        expression: 0, // 表达方式 (Expression)
-        decision: 0 // 决策风格 (Decision)
+        energy: 0,
+        social: 0,
+        expression: 0,
+        decision: 0
+    };
+    
+    questions.forEach((q, i) => {
+        let score = answers[i];
+        if (q.reverse) {
+            // E 题：得分越高越 E (5分)
+        } else {
+            // I 题：得分越高越 I (5分)
+        }
+        
+        // 我们利用原始的 1-5 分和反转后的 1-5 分，将分数集中到 I/E 偏向上
+        // 这里使用原始维度逻辑，但使用 totalI_Score 和 totalE_Score 的平均差来修正
+        
+        // 重新使用原始维度计分，但确保使用反向计分
+        let dimScore = answers[i];
+        if (q.reverse) dimScore = 6 - dimScore; // E 人问题反向计分
+        
+        // 维度得分越高越 I 人
+        dimensionScores[q.dimension] += dimScore;
+    });
+
+    // 原始维度计分逻辑会导致偏差，我们重新使用 I/E 倾向计分：
+    const dimNames = ['energy', 'social', 'expression', 'decision'];
+    const newDimScores = {
+        energy: { I: 0, E: 0 },
+        social: { I: 0, E: 0 },
+        expression: { I: 0, E: 0 },
+        decision: { I: 0, E: 0 }
     };
 
     questions.forEach((q, i) => {
-        let score = answers[i];
-        if (q.reverse) score = 6 - score; // 反向计分
-        dimensionScores[q.dimension] += score;
+        let score = answers[i] || 3;
+        
+        if (!q.reverse) { // I 题 (喜欢独处)
+            newDimScores[q.dimension].I += score; // I 分高
+            newDimScores[q.dimension].E += (6 - score); // E 分低
+        } else { // E 题 (喜欢聚会)
+            newDimScores[q.dimension].I += (6 - score); // I 分低
+            newDimScores[q.dimension].E += score; // E 分高
+        }
     });
 
-    // 标准化到0-25分（I人分数低，E人分数高）
-    const normalizedScores = Object.keys(dimensionScores).map(key => 
-        Math.round((dimensionScores[key] / 50) * 25)
-    );
-
-    const [energyScore, socialScore, expressionScore, decisionScore] = normalizedScores;
-
-    // 确定类型 (新的逻辑，增加特殊亚型判断)
+    // 标准化到 0-25 分 (0=I人，25=E人)
+    const normalizedScores = dimNames.map(key => {
+        const I_score = newDimScores[key].I; // Max 25
+        const E_score = newDimScores[key].E; // Max 25
+        // (E_score / (I_score + E_score)) * 50 -> 0-50, 然后 / 2 -> 0-25
+        const finalDimScore = Math.round((E_score / (I_score + E_score)) * 25);
+        return finalDimScore;
+    });
+    
+    // ... (亚型判断逻辑不变，使用 displayScore 和 normalizedScores)
+    
+    // 确定类型 (使用 displayScore 30-150)
     let subtype = null;
 
     // 1. 先判断常规亚型
@@ -2062,7 +2132,7 @@ dos: [
             break;
         }
     }
-
+    
     // 2. 如果常规范围未匹配，进行特殊亚型判断
     if (!subtype) {
         // 中性范围（81-100分）
@@ -2071,28 +2141,27 @@ dos: [
             subtype = displayScore <= 90 ? '中间人' : '灵活派'; 
         } else {
             // 检查特殊亚型逻辑: 跨越I/E的类型
-
-            // 独处型E人 (总分偏E, 但能量和决策偏I的 E人)
-            // 总分 > 100 且 能量/决策I倾向得分较高 (< 12.5)
+            const [energyScore, socialScore, expressionScore, decisionScore] = normalizedScores;
+            
+            // 独处型E人 (总分偏E, 但能量/决策偏I)
             if (displayScore > 100 && energyScore < 12.5 && decisionScore < 12.5) {
                  subtype = '独处型E人';
-            // 表演型I人 (总分偏I, 但社交和表达偏E的 I人)
-            // 总分 < 80 且 社交/表达E倾向得分较高 (> 12.5)
+            // 表演型I人 (总分偏I, 但社交/表达偏E)
             } else if (displayScore < 80 && socialScore > 12.5 && expressionScore > 12.5) {
                  subtype = '表演型I人';
             }
         }
     }
-
-    // 3. 最后的保底措施 (确保深度I/E人匹配)
+    
+    // 3. 最后的保底措施
     if (!subtype) {
         if (displayScore < 50) subtype = '深度I人';
         else if (displayScore > 130) subtype = '深度E人';
         else subtype = '灵活派'; // 最终保底
     }
-
+    
     const subtypeData = ieSubtypes[subtype];
-
+    
     sessionStorage.setItem('testResult', JSON.stringify({
         totalScore: displayScore,
         dimensionScores: normalizedScores,
@@ -2100,7 +2169,7 @@ dos: [
         icon: subtypeData.icon,
         desc: subtypeData.desc
     }));
-
+    
     showFreeResult();
 }
     
@@ -2454,6 +2523,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
