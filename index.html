@@ -2002,6 +2002,26 @@ dos: [
         nextBtn.click();
     }
 }
+        function selectOption(value) {
+    const nextBtn = document.getElementById('nextBtn');
+    
+    answers[currentQuestion] = value;
+    
+    // 立即更新UI，显示选中状态
+    renderQuestion(); 
+
+    // 自动触发下一题或完成测评
+    if (currentQuestion < 39) {
+        // 对于 Q1-Q39，等待 200ms 后自动跳到下一题
+        setTimeout(() => {
+            nextBtn.click(); 
+        }, 200);
+    } else {
+        // 对于 Q40，启用“完成测评”按钮，并尝试立即触发
+        nextBtn.disabled = false;
+        nextBtn.click();
+    }
+}
    function prevQuestion() {
     if (currentQuestion > 0) {
         currentQuestion--;
@@ -2564,6 +2584,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
