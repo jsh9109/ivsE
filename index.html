@@ -2248,18 +2248,30 @@ dos: [
         });
         
         // 更新沟通话术
-        const communicationScripts = document.getElementById('communicationScripts');
+const communicationTitleElement = document.getElementById('communicationTitle');
+if (communicationTitleElement) {
+    const subtypeType = result.totalScore < 90 ? 'I' : 'E';
+    communicationTitleElement.textContent = `${reportData.communication.length}种高效沟通话术 (${subtypeType}人专用)`;
+}
+
+const communicationScripts = document.getElementById('communicationScripts');
 communicationScripts.innerHTML = '';
-reportData.communication.forEach(comm => {
-    const p = document.createElement('p');
-    p.style.cssText = 'background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;';
-    p.innerHTML = `
-        <strong>场景: ${comm.scene}</strong><br>
-        ❌ ${comm.wrong}<br>
-        ✅ ${comm.right}
-    `;
-    communicationScripts.appendChild(p);
-});
+
+if (reportData.communication && reportData.communication.length > 0) {
+    reportData.communication.forEach(comm => {
+        const p = document.createElement('p');
+        p.style.cssText = 'background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;';
+        p.innerHTML = `
+            <strong>场景: ${comm.scene}</strong><br>
+            ❌ ${comm.wrong}<br>
+            ✅ ${comm.right}
+        `;
+        communicationScripts.appendChild(p);
+    });
+} else {
+     // 如果没有定义话术，提供默认提示
+     communicationScripts.innerHTML = '<p style="color: #F57C00; padding: 15px;">抱歉，该亚型暂未提供专属话术。请参考上方核心优势和行动方案。</p>';
+}
         
         // 更新资源包
         document.getElementById('bookList').innerHTML = reportData.books.map((b, i) => `${i+1}. ${b}`).join('<br>');
@@ -2432,6 +2444,7 @@ reportData.communication.forEach(comm => {
 </script>
 </body>
 </html>
+
 
 
 
