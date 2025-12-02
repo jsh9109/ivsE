@@ -2192,10 +2192,12 @@ dos: [
         document.getElementById('fullIeIcon').textContent = result.icon;
         document.getElementById('fullIeType').textContent = `${result.subtype} (得分: ${result.totalScore}/150)`;
         
-        // 更新第一部分
-        document.getElementById('coreAnalysis').textContent = reportData.desc;
-        document.getElementById('energyPattern').textContent = `你的能量模式${result.totalScore < 75 ? '偏向内向' : '偏向外向'}。${reportData.desc}`;
-        
+// 更新第一部分
+        document.getElementById('coreAnalysis').textContent = reportData.desc; // 亚型的核心描述
+        
+        // 使用一个通用的能量模式描述（也可以保持原始的，但需要确保原始文本正确）
+        // 这里我们暂时用一个通用的/默认的描述来简化
+        document.getElementById('energyPattern').textContent = reportData.desc; // 暂时用亚型的核心描述替代，防止出错
         // 标记当前亚型
         const subtypeItems = document.querySelectorAll('.subtype-item');
         subtypeItems.forEach(item => {
@@ -2403,6 +2405,7 @@ dos: [
 </script>
 </body>
 </html>
+
 
 
 
