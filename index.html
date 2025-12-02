@@ -1194,7 +1194,7 @@ var _hmt = _hmt || [];
             
             <div class="report-section">
                 <h3>📊 第一部分：深度心理分析</h3>
-                <h4>你的核心特质：深度I人</h4>
+<h4 id="coreTraitTitle">你的核心特质：深度I人</h4>
                 <p id="coreAnalysis">你的能量主要来自内心世界。你需要独处时间来充电，大型社交场合会让你感到疲惫。但这不代表你不喜欢社交，而是你更喜欢有深度的一对一交流。你的思考是深入的，观察是细腻的，这让你在需要专注和深度的领域表现出色。</p>
                 
                 <h4>你的能量模式</h4>
@@ -2222,6 +2222,7 @@ dos: [
         
         // 更新第一部分
         document.getElementById('coreAnalysis').textContent = reportData.desc;
+        document.getElementById('coreTraitTitle').textContent = `你的核心特质：${result.subtype}`; 
         document.getElementById('energyPattern').textContent = `你的能量模式${result.totalScore < 75 ? '偏向内向' : '偏向外向'}。${reportData.desc}`;
         
         // 标记当前亚型
@@ -2431,6 +2432,7 @@ dos: [
 </script>
 </body>
 </html>
+
 
 
 
