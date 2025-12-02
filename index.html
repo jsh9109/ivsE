@@ -13,6 +13,7 @@ var _hmt = _hmt || [];
   hm.src = "https://hm.baidu.com/hm.js?8b926a577e0952dbc9d6984112ebb715";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
+})();  // ✅ 添加这行
 </script>
 
     <style>
@@ -2027,6 +2028,7 @@ function nextQuestion() {
     }
 }
   function calculateResult() {
+      const dimNames = ['energy', 'social', 'expression', 'decision']; 
     let rawTotalScore = 0; // 用于计算总分的原始分 (40-200，120为中性点)
     
     // 维度得分 (0-50, 25为中性点)
@@ -2564,6 +2566,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
