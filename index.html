@@ -1982,40 +1982,30 @@ dos: [
         document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'block' : 'none';
         document.getElementById('nextBtn').textContent = currentQuestion === 39 ? '完成测评 ✓' : '下一题 →';
     }
-    
-    function selectOption(value) {
-        answers[currentQuestion] = value;
-        setTimeout(() => {
-            if (currentQuestion < 39) {
-                nextQuestion();
-            } else {
-                renderQuestion();
-                document.getElementById('nextBtn').disabled = false;
-                document.getElementById('nextBtn').click();
-            }
-        }, 200);
+   function prevQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
     }
+}
+
+function nextQuestion() {
+    const isLastQuestion = currentQuestion === 39;
     
-    function prevQuestion() {
-        if (currentQuestion > 0) {
-            currentQuestion--;
-            renderQuestion();
-        }
+    // 检查：如果当前题答案未选，则警告
+    if (answers[currentQuestion] === 0) {
+        alert('请选择一个选项');
+        return;
     }
-    
-    function nextQuestion() {
-        if (answers[currentQuestion] === 0) {
-            alert('请选择一个选项');
-            return;
-        }
-        
-        if (currentQuestion < 39) {
-            currentQuestion++;
-            renderQuestion();
-        } else {
-            calculateResult();
-        }
+
+    if (currentQuestion < 39) {
+        currentQuestion++;
+        renderQuestion();
+    } else {
+        // 最后一题，且答案已选
+        calculateResult();
     }
+}
   function calculateResult() {
     let rawTotalScore = 0; // 用于计算总分的原始分 (40-200，120为中性点)
     
@@ -2554,6 +2544,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
