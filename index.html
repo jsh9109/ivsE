@@ -14,1736 +14,399 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
-</script>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        /* I人E人主题色：渐变蓝紫到橙黄 */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #E8EAF6 0%, #FFF3E0 100%); /* 蓝紫到橙黄 */
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .header h1 {
-            background: linear-gradient(135deg, #6B5B95 0%, #FF9800 100%); /* 蓝紫到橙黄 */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        
-        .header p {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-        
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #6B5B95 0%, #FF9800 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-        
-        .type-showcase {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .type-card-preview {
-            background: linear-gradient(135deg, #E8EAF6 0%, #F3E5F5 100%);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .type-card-preview.i-type {
-            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
-        }
-        
-        .type-card-preview.e-type {
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-        }
-        
-        .type-card-preview:hover {
-            transform: translateY(-5px);
-            border-color: #6B5B95;
-        }
-        
-        .type-icon {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        
-        .type-name {
-            color: #6B5B95;
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 5px;
-        }
-        
-        .type-desc {
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        .features-list {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 30px 0;
-        }
-        
-        .features-list h3 {
-            color: #6B5B95;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .features-list ul {
-            list-style: none;
-        }
-        
-        .features-list li {
-            padding: 10px 0;
-            color: #666;
-            font-size: 1em;
-            border-bottom: 1px solid #E1BEE7;
-        }
-        
-        .features-list li:before {
-            content: "✓ ";
-            color: #6B5B95;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .input-group {
-            margin: 30px 0;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 18px;
-            border: 2px solid #E1BEE7;
-            border-radius: 12px;
-            font-size: 1.1em;
-            text-align: center;
-            transition: all 0.3s;
-            letter-spacing: 2px;
-        }
-        
-        .input-group input:focus {
-            outline: none;
-            border-color: #6B5B95;
-            box-shadow: 0 0 0 4px rgba(107, 91, 149, 0.1);
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 15px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #6B5B95 0%, #FF9800 100%);
-            color: white;
-            box-shadow: 0 8px 25px rgba(107, 91, 149, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(107, 91, 149, 0.4);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: #6B5B95;
-            border: 2px solid #6B5B95;
-        }
-        
-        .btn-secondary:hover {
-            background: #F3E5F5;
-        }
-        
-        .error-message {
-            background: #ffe0e0;
-            color: #d32f2f;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .admin-link {
-            text-align: center;
-            margin-top: 30px;
-            color: #999;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-        
-        .admin-link:hover {
-            color: #6B5B95;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #E1BEE7;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #6B5B95 0%, #FF9800 100%);
-            transition: width 0.3s;
-            border-radius: 10px;
-        }
-        
-        .progress-text {
-            text-align: center;
-            color: #6B5B95;
-            font-weight: bold;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-        
-        .question-card {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .question-text {
-            color: #333;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .option {
-            padding: 18px;
-            background: white;
-            border: 2px solid #E1BEE7;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.05em;
-            color: #666;
-        }
-        
-        .option:hover {
-            border-color: #6B5B95;
-            background: #F3E5F5;
-            transform: translateX(5px);
-        }
-        
-        .option.selected {
-            background: linear-gradient(135deg, #6B5B95 0%, #8E7CC3 100%);
-            color: white;
-            border-color: #6B5B95;
-        }
-        
-        .navigation-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .navigation-buttons .btn {
-            margin-top: 0;
-        }
-        
-        .result-banner {
-            background: linear-gradient(135deg, #6B5B95 0%, #FF9800 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .result-banner h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-        
-        .ie-score {
-            font-size: 4em;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        
-        .ie-level {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 10px 30px;
-            border-radius: 25px;
-            font-size: 1.2em;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 400px;
-            margin: 40px 0;
-        }
-        
-        .scores-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .score-item {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #6B5B95;
-        }
-        
-        .score-item-name {
-            color: #6B5B95;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        
-        .score-item-value {
-            font-size: 1.8em;
-            color: #333;
-            font-weight: bold;
-        }
-        
-        .score-item-desc {
-            color: #999;
-            font-size: 0.9em;
-        }
-        
-        .type-detail-card {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border: 2px solid #6B5B95;
-        }
-        
-        .type-detail-card h3 {
-            color: #6B5B95;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-        
-        .type-detail-card p {
-            color: #666;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-        
-        .characteristics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .characteristic-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .characteristic-title {
-            color: #6B5B95;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .characteristic-list {
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .basic-advice {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-        }
-        
-        .basic-advice h4 {
-            color: #6B5B95;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-        
-        .basic-advice ul {
-            list-style: none;
-        }
-        
-        .basic-advice li {
-            padding: 10px 0;
-            color: #666;
-            border-bottom: 1px solid #E1BEE7;
-        }
-        
-        .basic-advice li:before {
-            content: "💡 ";
-            margin-right: 10px;
-        }
-        
-        .unlock-section {
-            background: linear-gradient(135deg, #fff9e6 0%, #ffecb3 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 3px solid #ffd700;
-        }
-        
-        .unlock-section h3 {
-            color: #F57C00;
-            font-size: 2em;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .comparison-table {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-        }
-        
-        .comparison-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #FFE0B2;
-        }
-        
-        .comparison-row:last-child {
-            border-bottom: none;
-        }
-        
-        .comparison-free {
-            color: #999;
-        }
-        
-        .comparison-paid {
-            color: #F57C00;
-            font-weight: bold;
-        }
-        
-        .price-tag {
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .original-price {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 1.2em;
-        }
-        
-        .current-price {
-            color: #F57C00;
-            font-size: 3em;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .price-note {
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        /* 支付模块 CSS */
-        .payment-section {
-            width: 100%;
-            max-width: 450px;
-            margin: 20px auto 0 auto;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-        }
-
-        .quick-pay-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .payment-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .payment-btn .icon {
-            margin-right: 8px;
-            font-size: 18px;
-        }
-        .payment-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-        .payment-btn.alipay {
-            background: #00A3EE;
-        }
-        .payment-btn.wechat {
-            background: #07C160;
-        }
-
-        .divider-or {
-            text-align: center;
-            color: #aaa;
-            margin: 25px 0;
-            position: relative;
-        }
-        .divider-or span {
-            background: white;
-            padding: 0 10px;
-            position: relative;
-            z-index: 1;
-        }
-        .divider-or:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 100%;
-            height: 1px;
-            background: #e0e0e0;
-            z-index: 0;
-        }
-
-        .scan-title, .transfer-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .qr-code-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            text-align: center;
-        }
-        .qr-code-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .qr-code-item img {
-            width: 140px;
-            height: 140px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .btn-save {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 16px;
-            background: #f0f0f0;
-            color: #555;
-            border-radius: 6px;
-            font-size: 13px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        .btn-save:hover {
-            background: #e0e0e0;
-        }
-
-        .scan-tip {
-            text-align: center;
-            font-size: 13px;
-            color: #888;
-            background: #fafafa;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 20px;
-        }
-
-        .transfer-payment {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .copy-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 12px 15px;
-            border-radius: 8px;
-        }
-        .copy-item span {
-            font-size: 15px;
-            color: #333;
-            font-weight: 500;
-            word-break: break-all;
-        }
-        .copy-item button {
-            padding: 8px 14px;
-            border: none;
-            background: #6B5B95;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            margin-left: 10px;
-            flex-shrink: 0;
-        }
-        .copy-item button:hover {
-            background: #5A4A7F;
-        }
-        
-        .report-section {
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border-left: 5px solid #6B5B95;
-        }
-        
-        .report-section h3 {
-            color: #6B5B95;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-        
-        .report-section h4 {
-            color: #8E7CC3;
-            font-size: 1.3em;
-            margin: 25px 0 15px 0;
-        }
-        
-        .report-section p {
-            color: #666;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-        
-        .subtype-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .subtype-item {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 20px;
-            border-radius: 12px;
-        }
-        
-        .subtype-item.current {
-            border: 3px solid #6B5B95;
-            background: linear-gradient(135deg, #E1BEE7 0%, #B39DDB 100%);
-        }
-        
-        .subtype-number {
-            color: #6B5B95;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        
-        .subtype-name {
-            color: #333;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-        
-        .subtype-score {
-            color: #999;
-            font-size: 0.9em;
-        }
-        
-        .action-plan {
-            background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-        }
-        
-        .action-plan h4 {
-            color: #0277BD;
-            margin-bottom: 15px;
-        }
-        
-        .action-plan ul {
-            list-style: none;
-        }
-        
-        .action-plan li {
-            padding: 12px 0;
-            color: #555;
-            border-bottom: 1px solid #81D4FA;
-        }
-        
-        .action-plan li:before {
-            content: "✓ ";
-            color: #0277BD;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .resource-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .resource-card {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .resource-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .resource-title {
-            color: #6B5B95;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .resource-list {
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .dos-donts {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .dos-card {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            padding: 25px;
-            border-radius: 15px;
-        }
-        
-        .donts-card {
-            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
-            padding: 25px;
-            border-radius: 15px;
-        }
-        
-        .dos-card h4 {
-            color: #2E7D32;
-            margin-bottom: 15px;
-        }
-        
-        .donts-card h4 {
-            color: #C62828;
-            margin-bottom: 15px;
-        }
-        
-        .thank-banner {
-            background: linear-gradient(135deg, #6B5B95 0%, #FF9800 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .thank-banner h3 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-        
-        .admin-panel {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        }
-        
-        .admin-panel h2 {
-            color: #6B5B95;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #F3E5F5 0%, #E1F5FE 100%);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.5em;
-            color: #6B5B95;
-            font-weight: bold;
-        }
-        
-        .stat-label {
-            color: #666;
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
-        
-        .recent-records {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 25px 0;
-            overflow-y: auto;
-        }
-        
-        .record-item {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .card {
-                padding: 25px;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .header p {
-                font-size: 1em;
-            }
-            
-            .type-showcase {
-                grid-template-columns: 1fr;
-            }
-            
-            .chart-container {
-                height: 320px;
-            }
-            
-            .scores-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .characteristics {
-                grid-template-columns: 1fr;
-            }
-            
-            .subtype-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .resource-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .dos-donts {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .navigation-buttons {
-                flex-direction: column;
-            }
-            
-            .ie-score {
-                font-size: 3em;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .card {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 1.5em;
-            }
-            
-            .question-text {
-                font-size: 1.1em;
-            }
-            
-            .option {
-                padding: 15px;
-                font-size: 1em;
-            }
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div id="cardVerifyPage" class="card">
-            <div class="header">
-                <h1>🎭 I人E人深度测评</h1>
-                <p>发现你的社交能量模式</p>
-                <span class="badge">🔬 基于MBTI与社交心理学的专业评估</span>
-            </div>
-            
-            <div class="input-group">
-                <input type="text" id="cardInput" placeholder="请输入测评卡号" maxlength="20">
-            </div>
-            
-            <button class="btn btn-primary" onclick="verifyCard()">🎭 开始测评</button>
-            
-            <div class="type-showcase" style="margin-top: 40px;">
-                <div class="type-card-preview i-type">
-                    <div class="type-icon">🌙</div>
-                    <div class="type-name">I人(内向型)</div>
-                    <div class="type-desc">能量来自内心世界</div>
-                </div>
-                <div class="type-card-preview e-type">
-                    <div class="type-icon">☀️</div>
-                    <div class="type-name">E人(外向型)</div>
-                </div>
-            </div>
-            
-            <div class="features-list">
-                <h3>📋 测评包含</h3>
-                <ul>
-                    <li>40题专业心理量表</li>
-                    <li>6大核心维度分析</li>
-                    <li>12种I/E亚型详解</li>
-                    <li><strong style="color:#F57C00;">千字深度报告+专属行动方案 (¥4.9解锁)</strong></li>
-                </ul>
-            </div>
-            
-            <div class="error-message" id="errorMessage"></div>
-            
-            <div class="scan-tip" style="margin-top: 20px; background: #F3E5F5; text-align: left; line-height: 1.6; color: #666;">
-                🔒 <strong style="color: #6B5B95;">隐私声明：</strong> 本测评所有数据处理均在您的设备本地完成，卡号信息也存储在本地，不会上传到任何服务器。我们重视您的隐私安全。
-            </div>
-            
-            <div class="admin-link" onclick="showAdminPanel()">管理员入口 →</div>
-        </div>
-        
-        <div id="testPage" class="card hidden">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">第1题 / 共40题</div>
-            
-            <div class="question-card">
-                <div class="question-text" id="questionText"></div>
-                <div class="options" id="optionsContainer"></div>
-            </div>
-            
-            <div class="navigation-buttons">
-                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" style="display: none;">← 上一题</button>
-                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">下一题 →</button>
-            </div>
-        </div>
-        
-        <div id="freeResultPage" class="card hidden">
-            <div class="result-banner">
-                <h2>🎭 I人E人深度测评</h2>
-                <p style="font-size: 1.2em; margin-top: 15px;">您的社交能量类型（基础版）</p>
-                <div class="ie-score" id="ieIcon">🌙</div>
-                <div class="ie-level" id="ieType">深度I人</div>
-            </div>
-            
-            <div class="chart-container">
-                <canvas id="radarChart"></canvas>
-            </div>
-            
-            <div class="scores-list" id="scoresList"></div>
-            
-            <div class="type-detail-card">
-                <h3 id="typeName">深度I人</h3>
-                <p id="typeDesc">你从独处中获得能量，喜欢深度思考和有质量的一对一交流。大型社交场合会让你感到疲惫，但这不代表你不喜欢社交，只是你需要时间来恢复能量。</p>
-            </div>
-            
-            <div class="characteristics">
-                <div class="characteristic-item">
-                    <div class="characteristic-title">😊 核心优势</div>
-                    <div class="characteristic-list">
-                        • 深度思考<br>
-                        • 专注力强<br>
-                        • 善于倾听
-                    </div>
-                </div>
-                <div class="characteristic-item">
-                    <div class="characteristic-title">⚠️ 成长空间</div>
-                    <div class="characteristic-list">
-                        • 社交疲劳<br>
-                        • 表达迟疑<br>
-                        • 过度内耗
-                    </div>
-                </div>
-                <div class="characteristic-item">
-                    <div class="characteristic-title">💡 职业建议</div>
-                    <div class="characteristic-list">
-                        • 研究员<br>
-                        • 作家<br>
-                        • 程序员
-                    </div>
-                </div>
-            </div>
-            
-            <div class="basic-advice">
-                <h4>💡 基础版建议</h4>
-                <ul>
-                    <li>学会设定社交边界，保护自己的能量。</li>
-                    <li>找到适合自己的表达方式，不必强求。</li>
-                    <li>解锁完整报告，获取12种亚型分析和深度指导。</li>
-                </ul>
-            </div>
-            
-            <div class="unlock-section">
-                <h3 style="font-size: 1.8em; line-height: 1.6; text-align: center; margin-bottom: 25px;">
-                    您的<strong style="color: #F57C00;">基础版</strong>报告已出 👇<br>
-                    如需 <strong style="color: #F57C00;">12种I/E亚型详解</strong> 和 <strong style="color: #F57C00;">千字深度分析</strong>，可付费解锁：
-                </h3>
-                
-                <div class="comparison-table">
-                    <div class="comparison-row">
-                        <span class="comparison-free">基础类型（1种）</span>
-                        <span>→</span>
-                        <span class="comparison-paid">12种I/E亚型全图鉴</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-free">基础职业建议</span>
-                        <span>→</span>
-                        <span class="comparison-paid">50+ 精准职业推荐</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-free">基础分析</span>
-                        <span>→</span>
-                        <span class="comparison-paid">千字深度心理分析</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-free">无行动方案</span>
-                        <span>→</span>
-                        <span class="comparison-paid">30天能量管理计划</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-free">无人际指南</span>
-                        <span>→</span>
-                        <span class="comparison-paid">完整人际关系指南</span>
-                    </div>
-                </div>
-                
-                <div class="price-tag">
-                    <div class="original-price">原价 ¥29.9</div>
-                    <div class="current-price">¥4.9</div>
-                    <div class="price-note">限时特惠 · 一杯咖啡的价格换来深度自我认知</div>
-                </div>
-                
-                <div class="payment-section">
-                    <div class="quick-pay-buttons">
-                        <a href="https://qr.alipay.com/tsx15981nt9c4aydmvo2h3d" class="payment-btn alipay">
-                            <span class="icon">⚡</span> 支付宝快捷支付
-                        </a>
-                        <a href="javascript:void(0);" onclick="showWechatScan()" class="payment-btn wechat">
-                            <span class="icon">⚡</span> 微信快捷支付
-                        </a>
-                    </div>
-            
-                    <div class="divider-or"><span>或</span></div>
-            
-                    <div class="scan-payment">
-                        <div class="scan-title">📱 扫码支付</div>
-                        <div class="qr-code-grid">
-                            <div class="qr-code-item">
-                                <img src="wechat_qrcode.jpg" alt="微信收款码" id="wechatQR">
-                            </div>
-                            <div class="qr-code-item">
-                                <img src="alipay_qrcode.png" alt="支付宝收款码" id="alipayQR">
-                            </div>
-                        </div>
-                        <div class="scan-tip">
-                            💡 保存后打开APP → 扫一扫 → 相册选择
-                        </div>
-                    </div>
-            
-                    <div class="divider-or"><span>或</span></div>
-            
-                    <div class="transfer-payment">
-                        <div class="transfer-title">💳 复制账号转账</div>
-                        <div class="copy-item">
-                            <span id="wechatID">jsh9109</span>
-                            <button onclick="copyToClipboard('jsh9109', this)">复制微信</button>
-                        </div>
-                        <div class="copy-item">
-                            <span id="alipayID">313360631@qq.com</span>
-                            <button onclick="copyToClipboard('313360631@qq.com', this)">复制支付宝</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <label for="paymentProofInput" class="btn btn-primary" style="background: #F57C00; margin-top: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                    📸 上传付款截图，查看完整报告
-                </label>
-                <input type="file" id="paymentProofInput" accept="image/*" onchange="handlePaymentProof(event)" style="display: none;">
-            </div>
-        </div>
-        
-        <div id="fullReportPage" class="card hidden">
-            <div class="thank-banner">
-                <h3>🎭 感谢你的支持！</h3>
-                <p>完整深度报告已为你生成，请保存本页面随时查看</p>
-            </div>
-            
-            <div class="result-banner">
-                <h2>🎭 你的I/E人格（完整版）</h2>
-                <div class="ie-score" id="fullIeIcon">🌙</div>
-                <div class="ie-level" id="fullIeType">深度I人 (得分: 45/150)</div>
-            </div>
-            
-            <div class="chart-container">
-                <canvas id="fullRadarChart"></canvas>
-            </div>
-            
-            <div class="report-section">
-                <h3>📊 第一部分：深度心理分析</h3>
-<h4 id="coreTraitTitle">你的核心特质：深度I人</h4>
-                <p id="coreAnalysis">你的能量主要来自内心世界。你需要独处时间来充电，大型社交场合会让你感到疲惫。但这不代表你不喜欢社交，而是你更喜欢有深度的一对一交流。你的思考是深入的，观察是细腻的，这让你在需要专注和深度的领域表现出色。</p>
-                
-                <h4>你的能量模式</h4>
-                <p id="energyPattern">你的社交能量像电池一样，需要定期充电。独处、阅读、思考、创作都是你充电的方式。过度社交会让你的能量消耗殆尽，表现为焦虑、疲惫、想要逃离。理解这一点很重要：这不是缺陷，而是你的天性。</p>
-            </div>
-            
-            <div class="report-section">
-                <h3>🎯 第二部分：12种I/E亚型全图鉴</h3>
-                <div class="subtype-grid">
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型1</div>
-                        <div class="subtype-name">深度I人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型2</div>
-                        <div class="subtype-name">内敛I人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型3</div>
-                        <div class="subtype-name">平衡I人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型4</div>
-                        <div class="subtype-name">社交型I人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型5</div>
-                        <div class="subtype-name">中间人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型6</div>
-                        <div class="subtype-name">灵活派</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型7</div>
-                        <div class="subtype-name">温和E人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型8</div>
-                        <div class="subtype-name">活力E人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型9</div>
-                        <div class="subtype-name">社交达人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型10</div>
-                        <div class="subtype-name">深度E人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型11</div>
-                        <div class="subtype-name">独处型E人</div>
-                    </div>
-                    <div class="subtype-item">
-                        <div class="subtype-number">类型12</div>
-                        <div class="subtype-name">表演型I人</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h3>💡 第三部分：专属行动方案</h3>
-                <div class="action-plan">
-                    <h4 id="actionPlanTitle">深度I人的30天能量管理计划</h4>
-                    <ul id="actionPlanList">
-                        <li>第1-10天：记录你的能量曲线，了解哪些活动消耗能量，哪些补充能量。</li>
-                        <li>第11-20天：设定社交边界，学会拒绝不必要的社交邀约，保护独处时间。</li>
-                        <li>第21-30天：建立能量恢复仪式，找到3-5个能快速充电的活动。</li>
-                    </ul>
-                </div>
-                
-<h4 id="communicationTitle">5种高效沟通话术 (I人专用)</h4>
-                <div id="communicationScripts">
-                    <p style="background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;">
-                        <strong>场景1：拒绝社交邀约</strong><br>
-                        ❌ "我不去了..."（显得冷漠）<br>
-                        ✅ "谢谢邀请！这周我需要一些独处时间充电。下次有小型聚会叫我，我更喜欢深度聊天。"
-                    </p>
-                    <p style="background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;">
-                        <strong>场景2：会议发言</strong><br>
-                        ❌ （保持沉默，事后后悔）<br>
-                        ✅ "让我想想...我的想法是X，理由是Y。"（给自己思考时间）
-                    </p>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h3>📚 第四部分：成长资源包</h3>
-                <div class="resource-grid">
-                    <div class="resource-card">
-                        <div class="resource-icon">📖</div>
-                        <div class="resource-title">推荐书籍</div>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon">🎓</div>
-                        <div class="resource-title">专业课程</div>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon">🛠️</div>
-                        <div class="resource-title">效率工具</div>
-                    </div>
-                </div>
-            </div>
-            
-          <div class="report-section">
-    <h3 id="guidanceTitle">⚠️ I人的避坑指南</h3> <div class="dos-donts">
-        <div class="donts-card">
-            <h4 id="dontsCardTitle">❌ 千万别做的3件事</h4> <ul style="list-style: none; padding: 0;" id="dontsList"> 
-            </ul>
-        </div>
-        <div class="dos-card">
-            <h4 id="dosCardTitle">✅ 一定要做得3件事</h4> <ul style="list-style: none; padding: 0;" id="dosList">
-            </ul>
-        </div>
-    </div>
-</div>
-            
-            <button class="btn btn-secondary" onclick="location.reload()">重新测评</button>
-        </div>
-        
-        <div id="adminPanel" class="card hidden">
-            <div class="admin-panel">
-                <h2>🔐 管理员后台</h2>
-                
-                <div class="input-group">
-                    <input type="password" id="adminPassword" placeholder="请输入管理员密码">
-                </div>
-                
-                <button class="btn btn-primary" onclick="verifyAdmin()">登录</button>
-                
-                <div id="adminContent" class="hidden">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number" id="totalCards">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="usedCards">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="unusedCards">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="deviceCount">0</div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="margin: 30px 0 15px 0;">生成卡密</h3>
-                    <div class="input-group">
-                        <input type="number" id="cardCount" placeholder="输入生成数量（1-1000）" min="1" max="1000" value="10">
-                    </div>
-                    <button class="btn btn-primary" onclick="generateCards()">生成卡密</button>
-                    
-                    <h3 style="margin: 30px 0 15px 0;">最近使用记录</h3>
-                    <div class="recent-records" id="recentRecords">
-                        <div class="record-item">暂无记录</div>
-                    </div>
-                    
-                    <button class="btn btn-secondary" onclick="backToMain()">返回主页</button>
-                </div>
-            </div>
-        </div>
-    </div>
+const ADMIN_PASSWORD = 'lss900201';
+const MASTER_CODE = "GEMINI-MASTER";
     
-    <script>
-        const ADMIN_PASSWORD = 'lss900201';
-        const MASTER_CODE = "GEMINI-MASTER";
+// 40道I/E测试题目
+const questions = [
+    // 能量来源 (10题)
+    {text: '参加大型聚会后，我通常感到精疲力尽，需要独处恢复能量。', dimension: 'energy', reverse: false},
+    {text: '我更喜欢一对一的深度对话，而不是多人聚会的闲聊。', dimension: 'energy', reverse: false},
+    {text: '长时间独处会让我感到孤独和不安。', dimension: 'energy', reverse: true},
+    {text: '我从思考和内省中获得能量和快乐。', dimension: 'energy', reverse: false},
+    {text: '周末我更喜欢宅在家里，而不是出去社交。', dimension: 'energy', reverse: false},
+    {text: '和朋友聊天会让我感到活力充沛。', dimension: 'energy', reverse: true},
+    {text: '我需要定期的独处时间来"充电"。', dimension: 'energy', reverse: false},
+    {text: '热闹的环境让我感到兴奋和有活力。', dimension: 'energy', reverse: true},
+    {text: '我更喜欢通过文字表达想法，而不是当面交流。', dimension: 'energy', reverse: false},
+    {text: '我很享受成为聚会的焦点。', dimension: 'energy', reverse: true},
         
-        // 40道I/E测试题目
-        const questions = [
-            // 能量来源 (10题)
-            {text: '参加大型聚会后，我通常感到精疲力尽，需要独处恢复能量。', dimension: 'energy', reverse: false},
-            {text: '我更喜欢一对一的深度对话，而不是多人聚会的闲聊。', dimension: 'energy', reverse: false},
-            {text: '长时间独处会让我感到孤独和不安。', dimension: 'energy', reverse: true},
-            {text: '我从思考和内省中获得能量和快乐。', dimension: 'energy', reverse: false},
-            {text: '周末我更喜欢宅在家里，而不是出去社交。', dimension: 'energy', reverse: false},
-            {text: '和朋友聊天会让我感到活力充沛。', dimension: 'energy', reverse: true},
-            {text: '我需要定期的独处时间来"充电"。', dimension: 'energy', reverse: false},
-            {text: '热闹的环境让我感到兴奋和有活力。', dimension: 'energy', reverse: true},
-            {text: '我更喜欢通过文字表达想法，而不是当面交流。', dimension: 'energy', reverse: false},
-            {text: '我很享受成为聚会的焦点。', dimension: 'energy', reverse: true},
-            
-            // 社交偏好 (10题)
-            {text: '我在陌生人面前会感到拘谨和不自在。', dimension: 'social', reverse: false},
-            {text: '我很容易和陌生人打成一片。', dimension: 'social', reverse: true},
-            {text: '我的朋友圈比较小，但都是深交。', dimension: 'social', reverse: false},
-            {text: '我喜欢认识新朋友，拓展人际网络。', dimension: 'social', reverse: true},
-            {text: '在社交场合，我更倾向于观察而不是主动交谈。', dimension: 'social', reverse: false},
-            {text: '我很少主动发起社交活动。', dimension: 'social', reverse: false},
-            {text: '我喜欢参加各种社交活动和聚会。', dimension: 'social', reverse: true},
-            {text: '我更喜欢小团体的深度交流。', dimension: 'social', reverse: false},
-            {text: '我的社交日程通常排得很满。', dimension: 'social', reverse: true},
-            {text: '我可以连续几天不和人说话也不会觉得孤独。', dimension: 'social', reverse: false},
-            
-            // 表达方式 (10题)
-            {text: '我在表达观点前，需要时间先思考清楚。', dimension: 'expression', reverse: false},
-            {text: '我通过说话来整理思路。', dimension: 'expression', reverse: true},
-            {text: '我更喜欢倾听，而不是主导谈话。', dimension: 'expression', reverse: false},
-            {text: '我说话时很少停顿，想法源源不断。', dimension: 'expression', reverse: true},
-            {text: '我不喜欢即兴发言，更喜欢提前准备。', dimension: 'expression', reverse: false},
-            {text: '在会议中，我通常是最先发言的人之一。', dimension: 'expression', reverse: true},
-            {text: '我写作比口头表达更流畅。', dimension: 'expression', reverse: false},
-            {text: '我喜欢头脑风暴式的讨论。', dimension: 'expression', reverse: true},
-            {text: '我说话前会仔细斟酌用词。', dimension: 'expression', reverse: false},
-            {text: '我能轻松地在众人面前演讲。', dimension: 'expression', reverse: true},
-            
-            // 决策风格 (10题)
-            {text: '做决定前，我需要充分的独处思考时间。', dimension: 'decision', reverse: false},
-            {text: '我喜欢和别人讨论来帮助自己做决定。', dimension: 'decision', reverse: true},
-            {text: '我更倾向于自己分析问题，而不是寻求他人建议。', dimension: 'decision', reverse: false},
-            {text: '我经常通过和朋友聊天来理清思路。', dimension: 'decision', reverse: true},
-            {text: '我做决定时，更看重自己的内心感受。', dimension: 'decision', reverse: false},
-            {text: '我喜欢群策群力，集思广益。', dimension: 'decision', reverse: true},
-            {text: '我需要安静的环境来专注思考。', dimension: 'decision', reverse: false},
-            {text: '我在嘈杂的环境中也能很好地工作。', dimension: 'decision', reverse: true},
-            {text: '我更喜欢独立完成任务，而不是团队合作。', dimension: 'decision', reverse: false},
-            {text: '我从团队互动中获得很多灵感。', dimension: 'decision', reverse: true}
+    // 社交偏好 (10题)
+    {text: '我在陌生人面前会感到拘谨和不自在。', dimension: 'social', reverse: false},
+    {text: '我很容易和陌生人打成一片。', dimension: 'social', reverse: true},
+    {text: '我的朋友圈比较小，但都是深交。', dimension: 'social', reverse: false},
+    {text: '我喜欢认识新朋友，拓展人际网络。', dimension: 'social', reverse: true},
+    {text: '在社交场合，我更倾向于观察而不是主动交谈。', dimension: 'social', reverse: false},
+    {text: '我很少主动发起社交活动。', dimension: 'social', reverse: false},
+    {text: '我喜欢参加各种社交活动和聚会。', dimension: 'social', reverse: true},
+    {text: '我更喜欢小团体的深度交流。', dimension: 'social', reverse: false},
+    {text: '我的社交日程通常排得很满。', dimension: 'social', reverse: true},
+    {text: '我可以连续几天不和人说话也不会觉得孤独。', dimension: 'social', reverse: false},
+        
+    // 表达方式 (10题)
+    {text: '我在表达观点前，需要时间先思考清楚。', dimension: 'expression', reverse: false},
+    {text: '我通过说话来整理思路。', dimension: 'expression', reverse: true},
+    {text: '我更喜欢倾听，而不是主导谈话。', dimension: 'expression', reverse: false},
+    {text: '我说话时很少停顿，想法源源不断。', dimension: 'expression', reverse: true},
+    {text: '我不喜欢即兴发言，更喜欢提前准备。', dimension: 'expression', reverse: false},
+    {text: '在会议中，我通常是最先发言的人之一。', dimension: 'expression', reverse: true},
+    {text: '我写作比口头表达更流畅。', dimension: 'expression', reverse: false},
+    {text: '我喜欢头脑风暴式的讨论。', dimension: 'expression', reverse: true},
+    {text: '我说话前会仔细斟酌用词。', dimension: 'expression', reverse: false},
+    {text: '我能轻松地在众人面前演讲。', dimension: 'expression', reverse: true},
+        
+    // 决策风格 (10题)
+    {text: '做决定前，我需要充分的独处思考时间。', dimension: 'decision', reverse: false},
+    {text: '我喜欢和别人讨论来帮助自己做决定。', dimension: 'decision', reverse: true},
+    {text: '我更倾向于自己分析问题，而不是寻求他人建议。', dimension: 'decision', reverse: false},
+    {text: '我经常通过和朋友聊天来理清思路。', dimension: 'decision', reverse: true},
+    {text: '我做决定时，更看重自己的内心感受。', dimension: 'decision', reverse: false},
+    {text: '我喜欢群策群力，集思广益。', dimension: 'decision', reverse: true},
+    {text: '我需要安静的环境来专注思考。', dimension: 'decision', reverse: false},
+    {text: '我在嘈杂的环境中也能很好地工作。', dimension: 'decision', reverse: true},
+    {text: '我更喜欢独立完成任务，而不是团队合作。', dimension: 'decision', reverse: false},
+    {text: '我从团队互动中获得很多灵感。', dimension: 'decision', reverse: true}
 ];
         
 const options = ['完全不像我', '不太像我', '不确定', '有点像我', '非常像我'];
         
-// 12种I/E亚型定义 (为避免篇幅过长，此处省略，但保持原代码结构)
+// 12种I/E亚型定义 (包含所有报告内容)
 const ieSubtypes = {
-    '深度I人': {
-        range: [30, 50],
-        icon: '🌙',
-        desc: '你极度内向，从独处中获得最大能量。你需要大量的独处时间来充电，社交活动对你来说是高度消耗的。你的内心世界极其丰富，思考深邃。',
-        strengths: ['深度思考', '高度专注', '观察入微', '独立性强', '内心丰富'],
-        weaknesses: ['社交疲劳', '过度隔离', '表达困难', '容易被误解', '社交焦虑'],
-        careers: ['研究员', '作家', '程序员', '艺术家', '数据分析师'],
-        actionPlan: {
-            title: '深度I人的30天能量管理计划',
-            steps: [
-                '第1-10天：记录能量曲线，标注哪些活动消耗能量，哪些补充能量。',
-                '第11-20天：设定严格的社交边界，每周保证至少3天完全独处时间。',
-                '第21-30天：建立能量恢复仪式，创建5-7个快速充电活动清单。'
-            ]
-        },
-        communication: [
-            {scene: '拒绝社交', wrong: '（勉强答应，内心崩溃）', right: '谢谢邀请！这周我需要独处充电。有小型深度聊天的机会记得叫我。'},
-            {scene: '会议发言', wrong: '（沉默不语，事后后悔）', right: '让我想一下...（暂停3秒）我的想法是X，理由是Y。'}
-        ],
-        books: ['《内向者优势》', '《安静：内向性格的竞争力》', '《独处的艺术》'],
-        courses: ['TED《内向者的力量》', '得到《深度工作》', 'Coursera《专注力训练》'],
-        tools: ['Forest (专注)', 'Calm (冥想)', 'Day One (日记)'],
-        donts: [
-            {title: '强迫社交', desc: '不要为了"合群"而过度社交，这会耗尽你的能量。'},
-            {title: '忽视充电', desc: '没有独处时间会导致长期焦虑和burnout。'},
-            {title: '自我否定', desc: '深度I人不是缺陷，而是独特的优势。'}
-        ],
-        dos: [
-            {title: '保护独处', desc: '每天至少2小时完全独处，这是你的生命线。'},
-            {title: '深度连接', desc: '培养2-3个真正理解你的深度关系。'},
-            {title: '发挥优势', desc: '选择需要深度、专注、独立的工作领域。'}
-        ]
-    },
-    '内敛I人': {
-        range: [51, 60],
-        icon: '🌙',
-        desc: '你高度内向，但比深度I人稍微能适应一些社交场合。你仍然从独处中获得主要能量，但偶尔的社交不会让你完全崩溃。',
-        strengths: ['深度思考', '专注力强', '善于倾听', '独立性', '观察敏锐'],
-        weaknesses: ['社交疲劳', '表达迟疑', '容易内耗', '逃避冲突', '过度思虑'],
-        careers: ['编辑', '设计师', '会计师', '档案管理', '翻译'],
-        actionPlan: {
-            title: '内敛I人的30天社交适应计划',
-            steps: [
-                '第1-10天：每周参加1次小型社交（2-4人），观察能量消耗。',
-                '第11-20天：练习主动发起话题，从熟悉的人开始。',
-                '第21-30天：建立"社交-充电"循环，社交后立即安排恢复时间。'
-            ]
-        },
-        communication: [
-            {scene: '职场社交', wrong: '（完全回避，显得冷漠）', right: '我参加前半场，后半场我需要独处恢复。'},
-            {scene: '表达观点', wrong: '（完全沉默）', right: '我需要时间思考...明天给你书面回复好吗？'}
-        ],
-        books: ['《内向者优势》', '《社交恐惧症自救》', '《安静的力量》'],
-        courses: ['得到《沟通的方法》', '网易云课堂《社交心理学》', 'Udemy《Public Speaking》'],
-        tools: ['Notion (知识管理)', 'Headspace (冥想)', 'Todoist (任务管理)'],
-        donts: [
-            {title: '过度妥协', desc: '不要为了避免冲突而牺牲自己的需求。'},
-            {title: '无限推迟', desc: '不要用"下次"来逃避所有社交，适度参与很重要。'},
-            {title: '孤立自己', desc: '完全隔离会损害心理健康，需要适度连接。'}
-        ],
-        dos: [
-            {title: '小步前进', desc: '从小型社交开始，逐步扩大舒适区。'},
-            {title: '提前准备', desc: '社交前准备话题，降低临场焦虑。'},
-            {title: '及时恢复', desc: '社交后立即安排独处恢复时间。'}
-        ]
-    },
-    '平衡I人': {
-        range: [61, 70],
-        icon: '🌗',
-        desc: '你偏内向，但已经能较好地平衡社交和独处。你仍然需要独处来充电，但也能享受适度的社交活动。',
-        strengths: ['平衡能力', '适应性强', '善于倾听', '深度思考', '情绪稳定'],
-        weaknesses: ['能量消耗快', '需要规划', '有时迟疑', '偶尔内耗', '边界模糊'],
-        careers: ['产品经理', '人力资源', '心理咨询', '教育工作', '客户成功'],
-        actionPlan: {
-            title: '平衡I人的30天能量优化计划',
-            steps: [
-                '第1-10天：记录社交-独处比例，找到最佳平衡点（建议3:7或4:6）。',
-                '第11-20天：学会主动管理社交日程，不被动接受所有邀约。',
-                '第21-30天：建立能量预警机制，疲劳时立即暂停社交。'
-            ]
-        },
-        communication: [
-            {scene: '职场会议', wrong: '（要么完全沉默，要么过度发言）', right: '我听了大家的想法，我补充2点...（适度参与）'},
-            {scene: '朋友聚会', wrong: '（强撑到最后，回家崩溃）', right: '我先撤了，玩得开心！（适时退场）'}
-        ],
-        books: ['《内向优势》', '《高效能人士的七个习惯》', '《少有人走的路》'],
-        courses: ['混沌大学《自我管理》', '得到《时间管理》', 'Coursera《Emotional Intelligence》'],
-        tools: ['RescueTime (时间管理)', 'Notion (个人系统)', 'Calm (冥想)'],
-        donts: [
-            {title: '过度社交', desc: '不要为了"证明自己"而过度参与社交。'},
-            {title: '忽视信号', desc: '疲劳时不要硬撑，及时休息。'},
-            {title: '模糊边界', desc: '要明确自己的社交边界和底线。'}
-        ],
-        dos: [
-            {title: '主动规划', desc: '提前规划社交和独处时间，保持平衡。'},
-            {title: '灵活调整', desc: '根据状态灵活调整社交强度。'},
-            {title: '发挥优势', desc: '利用平衡能力，在需要协调的岗位发光。'}
-        ]
-    },
-    '社交型I人': {
-        range: [71, 80],
-        icon: '🌗',
-        desc: '你轻度内向，已经具备较强的社交能力。你能享受社交，但仍然需要独处来恢复能量。很多人可能看不出你是I人。',
-        strengths: ['社交能力', '适应性强', '表达清晰', '善于协调', '情商高'],
-        weaknesses: ['容易疲劳', '假装外向', '能量消耗', '有时迷茫', '边界不清'],
-        careers: ['市场营销', '咨询顾问', '销售', '公关', '项目管理'],
-        actionPlan: {
-            title: '社交型I人的30天真实自我计划',
-            steps: [
-                '第1-10天：停止"假装外向"，允许自己在熟人面前展现I人一面。',
-                '第11-20天：建立社交能量预算，每周社交不超过X小时。',
-                '第21-30天：向亲近的人坦诚你的I人属性，寻求理解。'
-            ]
-        },
-        communication: [
-            {scene: '职场表现', wrong: '（一直假装很外向，内心疲惫）', right: '我今天状态不太好，能否改天再讨论？（真实表达）'},
-            {scene: '朋友聚会', wrong: '（勉强成为气氛担当，回家崩溃）', right: '你们聊，我休息一下。（允许自己退出）'}
-        ],
-        books: ['《假性外向者》', '《做自己就好》', '《不完美，才美》'],
-        courses: ['得到《如何做自己》', 'TED《脆弱的力量》', '网易云课堂《自我认知》'],
-        tools: ['Notion (能量管理)', 'Habitica (习惯养成)', 'Headspace (冥想)'],
-        donts: [
-            {title: '假装外向', desc: '长期假装会导致身份危机和burnout。'},
-            {title: '过度消耗', desc: '不要透支能量来维持"外向"人设。'},
-            {title: '否定自我', desc: '不要因为"看起来像E人"就否定I人属性。'}
-        ],
-        dos: [
-            {title: '接纳自己', desc: '接受你是I人的事实，这是你的本质。'},
-            {title: '设定边界', desc: '明确告诉他人你的能量需求。'},
-            {title: '真实表达', desc: '在安全的关系中，展现真实的I人一面。'}
-        ]
-    },
-    '中间人': {
-        range: [81, 90],
-        icon: '⚖️',
-        desc: '你接近I/E的中点，略偏I人。你能灵活切换社交和独处模式，但整体上还是从独处中获得更多能量。',
-        strengths: ['灵活性强', '适应力好', '平衡能力', '换位思考', '沟通流畅'],
-        weaknesses: ['容易迷茫', '身份模糊', '能量不稳', '难以选择', '压力大'],
-        careers: ['人力资源', '教育培训', '心理咨询', '中层管理', '协调员'],
-        actionPlan: {
-            title: '中间人的30天自我探索计划',
-            steps: [
-                '第1-10天：记录每天的能量来源，是社交多还是独处多。',
-                '第11-20天：尝试连续3天偏I模式，再连续3天偏E模式，对比感受。',
-                '第21-30天：找到你的"基准状态"，即最舒适的I/E平衡点。'
-            ]
-        },
-        communication: [
-            {scene: '职场定位', wrong: '（不断切换角色，感到疲惫）', right: '我擅长协调，可以做桥梁角色。（发挥优势）'},
-            {scene: '自我介绍', wrong: '我也不知道我是I人还是E人...（迷茫）', right: '我比较灵活，能适应不同场合。（自信表达）'}
-        ],
-        books: ['《安静的力量》', '《外向性格的竞争力》', '《做自己》'],
-        courses: ['得到《自我认知》', '混沌大学《个人定位》', 'Coursera《Personality Psychology》'],
-        tools: ['Notion (自我追踪)', 'RescueTime (时间分析)', 'Day One (反思日记)'],
-        donts: [
-            {title: '过度纠结', desc: '不要纠结于"我到底是I还是E"，接受灵活性。'},
-            {title: '失去中心', desc: '不要因为灵活而失去自我，要有核心定位。'},
-            {title: '过度切换', desc: '频繁切换模式会消耗大量能量。'}
-        ],
-        dos: [
-            {title: '接纳特质', desc: '接受你的灵活性是优势，不是缺陷。'},
-            {title: '找到平衡', desc: '通过记录找到你的最佳I/E比例。'},
-            {title: '发挥桥梁', desc: '在需要协调I/E群体的岗位发光。'}
-        ]
-    },
-    '灵活派': {
-        range: [91, 100],
-        icon: '⚖️',
-        desc: '你接近I/E的中点，略偏E人。你能享受社交，也能享受独处。你的能量来源比较平衡，社交和独处都能让你充电。',
-        strengths: ['灵活自如', '适应性强', '社交能力', '独处能力', '平衡心态'],
-        weaknesses: ['有时矛盾', '难以定位', '能量波动', '选择困难', '需要调整'],
-        careers: ['自由职业', '创业者', '顾问', '教练', '斜杠青年'],
-        actionPlan: {
-            title: '灵活派的30天优势发挥计划',
-            steps: [
-                '第1-10天：识别你在不同场景下的自然倾向（工作时/休息时）。',
-                '第11-20天：主动选择适合当下状态的活动，不被他人期待绑架。',
-                '第21-30天：建立"能量自由"系统，随时切换社交/独处模式。'
-            ]
-        },
-        communication: [
-            {scene: '职场角色', wrong: '（被动接受各种角色，感到疲惫）', right: '这个项目我适合做协调，那个我更擅长独立完成。'},
-            {scene: '生活安排', wrong: '（随波逐流，没有主见）', right: '今天我想独处，明天我们一起玩。（主动选择）'}
-        ],
-        books: ['《灵活的思维》', '《反脆弱》', '《斜杠创业家》'],
-        courses: ['混沌大学《创新思维》', '得到《个人商业模式》', 'Coursera《Flexible Thinking》'],
-        tools: ['Notion (全能工具)', 'Miro (灵活协作)', 'Toggl (时间自由)'],
-        donts: [
-            {title: '被动适应', desc: '不要总是被动适应他人，要主动选择。'},
-            {title: '失去自我', desc: '灵活不等于没有立场和原则。'},
-            {title: '忽视需求', desc: '要及时识别当下真正的能量需求。'}
-        ],
-        dos: [
-            {title: '主动选择', desc: '根据状态主动选择社交或独处。'},
-            {title: '发挥优势', desc: '在需要灵活性的工作中大放异彩。'},
-            {title: '保持平衡', desc: '定期检查I/E平衡，避免长期偏向一端。'}
-        ]
-    },
-    '温和E人': {
-        range: [101, 110],
-        icon: '☀️',
-        desc: '你轻度外向，从社交中获得能量，但也需要偶尔的独处时间。你不会像深度E人那样极度渴望社交。',
-        strengths: ['社交能力', '亲和力强', '表达流畅', '团队协作', '情绪稳定'],
-        weaknesses: ['偶尔疲惫', '需要平衡', '有时内耗', '边界模糊', '能量波动'],
-        careers: ['教师', '客服经理', '团队领导', '社工', '培训师'],
-        actionPlan: {
-            title: '温和E人的30天能量管理计划',
-            steps: [
-                '第1-10天：记录社交后的感受，识别哪些社交真正带来能量。',
-                '第11-20天：学会拒绝低质量社交，只参加真正想去的活动。',
-                '第21-30天：安排定期的独处时间，保持能量平衡。'
-            ]
-        },
-        communication: [
-            {scene: '职场社交', wrong: '（参加所有活动，有时感到疲惫）', right: '这个我就不去了，我需要休息一下。'},
-            {scene: '朋友聚会', wrong: '（勉强当气氛担当）', right: '今天我比较安静，你们聊。（真实表达）'}
-        ],
-        books: ['《外向者优势》', '《社交的艺术》', '《高情商沟通》'],
-        courses: ['得到《沟通的方法》', 'Coursera《Social Skills》', '网易云课堂《人际关系》'],
-        tools: ['Meetup (社交活动)', 'LinkedIn (职业社交)', 'Notion (日程管理)'],
-        donts: [
-            {title: '过度社交', desc: '不要为了维持"E人"形象而过度社交。'},
-            {title: '忽视休息', desc: '也需要定期的独处时间来恢复。'},
-            {title: '质量不控', desc: '不是所有社交都有价值，要筛选。'}
-        ],
-        dos: [
-            {title: '选择性社交', desc: '只参加真正有价值的社交活动。'},
-            {title: '保护能量', desc: '安排定期的休息和独处时间。'},
-            {title: '深度连接', desc: '在数量基础上，也追求质量。'}
-        ]
-    },
-    '活力E人': {
-        range: [111, 120],
-        icon: '☀️',
-        desc: '你偏外向，从社交中获得大量能量。你喜欢热闹，享受与人互动，但也能接受偶尔的独处。',
-        strengths: ['社交达人', '活力充沛', '感染力强', '表达能力', '领导力'],
-        weaknesses: ['难以独处', '有时浮躁', '深度不足', '冲动', '注意力分散'],
-        careers: ['销售总监', '市场营销', '公关经理', '活动策划', '主持人'],
-        actionPlan: {
-            title: '活力E人的30天深度培养计划',
-            steps: [
-                '第1-10天：每天安排30分钟安静独处，练习深度思考。',
-                '第11-20天：选择一个话题深入研究，输出3000字文章。',
-                '第21-30天：建立"深度-社交"循环，不只是表面互动。'
-            ]
-        },
-        communication: [
-            {scene: '职场会议', wrong: '（滔滔不绝，占用太多时间）', right: '我简要说3点...（控制时长，给他人空间）'},
-            {scene: '朋友关系', wrong: '（泛泛之交很多，深交很少）', right: '我们找时间深聊一下？（建立深度连接）'}
-        ],
-        books: ['《深度工作》', '《刻意练习》', '《安静的力量》'],
-        courses: ['得到《深度思考》', '混沌大学《战略思维》', 'Coursera《Critical Thinking》'],
-        tools: ['Forest (专注)', 'Notion (知识管理)', 'RescueTime (时间管理)'],
-        donts: [
-            {title: '过度社交', desc: '不是所有时间都要用来社交，需要深度时间。'},
-            {title: '浮于表面', desc: '不要满足于泛泛之交，要建立深度关系。'},
-            {title: '忽视独处', desc: '也需要独处来沉淀和成长。'}
-        ],
-        dos: [
-            {title: '培养深度', desc: '每周至少一次深度学习或思考。'},
-            {title: '质量优先', desc: '在数量基础上，追求关系的质量。'},
-            {title: '学会倾听', desc: '不只是表达，更要学会倾听。'}
-        ]
-    },
-    '社交达人': {
-        range: [121, 130],
-        icon: '☀️',
-        desc: '你高度外向，极度渴望社交互动。你从人群中获得巨大能量，独处会让你感到不安和无聊。',
-        strengths: ['社交能力', '影响力强', '活力四射', '感染力', '领导力'],
-        weaknesses: ['难以独处', '深度不足', '冲动决策', '注意力分散', '依赖他人'],
-        careers: ['网红', '演员', '销售冠军', '政治家', 'CEO'],
-        actionPlan: {
-            title: '社交达人的30天平衡计划',
-            steps: [
-                '第1-10天：每天强制1小时独处，关闭所有社交软件。',
-                '第11-20天：学习冥想和深度工作，培养专注力。',
-                '第21-30天：建立"独处-社交"循环，不过度依赖社交。'
-            ]
-        },
-        communication: [
-            {scene: '职场表现', wrong: '（过度社交，忽视深度工作）', right: '上午我专注工作，下午我们一起讨论。（平衡）'},
-            {scene: '个人成长', wrong: '（只通过社交学习，缺乏深度）', right: '我需要独处时间来消化和思考。（自我觉察）'}
-        ],
-        books: ['《深度工作》', '《安静》', '《刻意练习》'],
-        courses: ['得到《如何深度思考》', 'Coursera《Mindfulness》', '混沌大学《战略思维》'],
-        tools: ['Forest (强制专注)', 'Freedom (屏蔽社交)', 'Calm (冥想)'],
-        donts: [
-            {title: '过度依赖', desc: '不要过度依赖社交来定义自我价值。'},
-            {title: '逃避独处', desc: '学会与自己相处，这是成长的必经之路。'},
-            {title: '忽视深度', desc: '表面的热闹不能代替深度的成长。'}
-        ],
-        dos: [
-            {title: '培养独处', desc: '每天至少1小时独处，学会享受。'},
-            {title: '深度学习', desc: '选择1-2个领域深耕，建立专业度。'},
-            {title: '质量社交', desc: '减少泛泛之交，建立深度关系。'}
-        ]
-    },
-    '深度E人': {
-        range: [131, 150],
-        icon: '☀️',
-        desc: '你极度外向，完全从社交中获得能量。独处对你来说是痛苦的，你需要持续的人际互动来保持活力。',
-        strengths: ['超强社交', '影响力', '感染力', '领导力', '活力无限'],
-        weaknesses: ['无法独处', '深度缺失', '过度依赖', '冲动', '浮躁'],
-        careers: ['超级网红', '顶级销售', '政治领袖', '娱乐明星', '创业领袖'],
-        actionPlan: {
-            title: '深度E人的30天自我修炼计划',
-            steps: [
-                '第1-10天：每天强制2小时完全独处，学习与自己相处。',
-                '第11-20天：开始冥想练习，每天10分钟，培养内在力量。',
-                '第21-30天：选择一个深度话题研究，输出5000字报告。'
-            ]
-        },
-        communication: [
-            {scene: '职场发展', wrong: '（只靠社交，缺乏硬实力）', right: '我在保持社交优势的同时，也在深耕专业。'},
-            {scene: '个人关系', wrong: '（泛泛之交无数，深交为零）', right: '我想和你建立更深的连接。（深度关系）'}
-        ],
-        books: ['《深度工作》', '《安静》', '《独处的艺术》'],
-        courses: ['得到《深度思考》', 'Coursera《Meditation》', '混沌大学《哲学思考》'],
-        tools: ['Forest (强制专注)', 'Freedom (断网工具)', 'Headspace (冥想)'],
-        donts: [
-            {title: '完全依赖', desc: '不要让社交成为唯一的能量来源。'},
-            {title: '逃避成长', desc: '深度成长需要独处和沉淀。'},
-            {title: '表面繁华', desc: '表面的热闹不能掩盖内在的空虚。'}
-        ],
-        dos: [
-            {title: '强制独处', desc: '每天至少2小时独处，这是成长的必需。'},
-            {title: '建立深度', desc: '在某个领域建立真正的专业度。'},
-            {title: '内在修炼', desc: '通过冥想、阅读等培养内在力量。'}
-        ]
-    },
-    '独处型E人': {
-        range: null, // 特殊亚型，根据其他维度判断
-        icon: '🌓',
-        desc: '你是特殊的E人：虽然从社交中获得能量，但你也深刻需要独处时间来思考和创作。你是"需要独处的外向者"。',
+    '深度I人': {
+        range: [30, 50],
+        icon: '🌙',
+        desc: '你极度内向，从独处中获得最大能量。你需要大量的独处时间来充电，社交活动对你来说是高度消耗的。你的内心世界极其丰富，思考深邃。',
+        strengths: ['深度思考', '高度专注', '观察入微', '独立性强', '内心丰富'],
+        weaknesses: ['社交疲劳', '过度隔离', '表达困难', '容易被误解', '社交焦虑'],
+        careers: ['研究员', '作家', '程序员', '艺术家', '数据分析师'],
+        actionPlan: {
+            title: '深度I人的30天能量管理计划',
+            steps: [
+                '第1-10天：记录能量曲线，标注哪些活动消耗能量，哪些补充能量。',
+                '第11-20天：设定严格的社交边界，每周保证至少3天完全独处时间。',
+                '第21-30天：建立能量恢复仪式，创建5-7个快速充电活动清单。'
+            ]
+        },
+        communication: [
+            {scene: '拒绝社交', wrong: '（勉强答应，内心崩溃）', right: '谢谢邀请！这周我需要独处充电。有小型深度聊天的机会记得叫我。'},
+            {scene: '会议发言', wrong: '（沉默不语，事后后悔）', right: '让我想一下...（暂停3秒）我的想法是X，理由是Y。'}
+        ],
+        books: ['《内向者优势》', '《安静：内向性格的竞争力》', '《独处的艺术》'],
+        courses: ['TED《内向者的力量》', '得到《深度工作》', 'Coursera《专注力训练》'],
+        tools: ['Forest (专注)', 'Calm (冥想)', 'Day One (日记)'],
+        donts: [
+            {title: '强迫社交', desc: '不要为了"合群"而过度社交，这会耗尽你的能量。'},
+            {title: '忽视充电', desc: '没有独处时间会导致长期焦虑和burnout。'},
+            {title: '自我否定', desc: '深度I人不是缺陷，而是独特的优势。'}
+        ],
+        dos: [
+            {title: '保护独处', desc: '每天至少2小时完全独处，这是你的生命线。'},
+            {title: '深度连接', desc: '培养2-3个真正理解你的深度关系。'},
+            {title: '发挥优势', desc: '选择需要深度、专注、独立的工作领域。'}
+        ]
+    },
+    '内敛I人': {
+        range: [51, 60],
+        icon: '🌙',
+        desc: '你高度内向，但比深度I人稍微能适应一些社交场合。你仍然从独处中获得主要能量，但偶尔的社交不会让你完全崩溃。',
+        strengths: ['深度思考', '专注力强', '善于倾听', '独立性', '观察敏锐'],
+        weaknesses: ['社交疲劳', '表达迟疑', '容易内耗', '逃避冲突', '过度思虑'],
+        careers: ['编辑', '设计师', '会计师', '档案管理', '翻译'],
+        actionPlan: {
+            title: '内敛I人的30天社交适应计划',
+            steps: [
+                '第1-10天：每周参加1次小型社交（2-4人），观察能量消耗。',
+                '第11-20天：练习主动发起话题，从熟悉的人开始。',
+                '第21-30天：建立"社交-充电"循环，社交后立即安排恢复时间。'
+            ]
+        },
+        communication: [
+            {scene: '职场社交', wrong: '（完全回避，显得冷漠）', right: '我参加前半场，后半场我需要独处恢复。'},
+            {scene: '表达观点', wrong: '（完全沉默）', right: '我需要时间思考...明天给你书面回复好吗？'}
+        ],
+        books: ['《内向者优势》', '《社交恐惧症自救》', '《安静的力量》'],
+        courses: ['得到《沟通的方法》', '网易云课堂《社交心理学》', 'Udemy《Public Speaking》'],
+        tools: ['Notion (知识管理)', 'Headspace (冥想)', 'Todoist (任务管理)'],
+        donts: [
+            {title: '过度妥协', desc: '不要为了避免冲突而牺牲自己的需求。'},
+            {title: '无限推迟', desc: '不要用"下次"来逃避所有社交，适度参与很重要。'},
+            {title: '孤立自己', desc: '完全隔离会损害心理健康，需要适度连接。'}
+        ],
+        dos: [
+            {title: '小步前进', desc: '从小型社交开始，逐步扩大舒适区。'},
+            {title: '提前准备', desc: '社交前准备话题，降低临场焦虑。'},
+            {title: '及时恢复', desc: '社交后立即安排独处恢复时间。'}
+        ]
+    },
+    '平衡I人': {
+        range: [61, 70],
+        icon: '🌗',
+        desc: '你偏内向，但已经能较好地平衡社交和独处。你仍然需要独处来充电，但也能享受适度的社交活动。',
+        strengths: ['平衡能力', '适应性强', '善于倾听', '深度思考', '情绪稳定'],
+        weaknesses: ['能量消耗快', '需要规划', '有时迟疑', '偶尔内耗', '边界模糊'],
+        careers: ['产品经理', '人力资源', '心理咨询', '教育工作', '客户成功'],
+        actionPlan: {
+            title: '平衡I人的30天能量优化计划',
+            steps: [
+                '第1-10天：记录社交-独处比例，找到最佳平衡点（建议3:7或4:6）。',
+                '第11-20天：学会主动管理社交日程，不被动接受所有邀约。',
+                '第21-30天：建立能量预警机制，疲劳时立即暂停社交。'
+            ]
+        },
+        communication: [
+            {scene: '职场会议', wrong: '（要么完全沉默，要么过度发言）', right: '我听了大家的想法，我补充2点...（适度参与）'},
+            {scene: '朋友聚会', wrong: '（强撑到最后，回家崩溃）', right: '我先撤了，玩得开心！（适时退场）'}
+        ],
+        books: ['《内向优势》', '《高效能人士的七个习惯》', '《少有人走的路》'],
+        courses: ['混沌大学《自我管理》', '得到《时间管理》', 'Coursera《Emotional Intelligence》'],
+        tools: ['RescueTime (时间管理)', 'Notion (个人系统)', 'Calm (冥想)'],
+        donts: [
+            {title: '过度社交', desc: '不要为了"证明自己"而过度参与社交。'},
+            {title: '忽视信号', desc: '疲劳时不要硬撑，及时休息。'},
+            {title: '模糊边界', desc: '要明确自己的社交边界和底线。'}
+        ],
+        dos: [
+            {title: '主动规划', desc: '提前规划社交和独处时间，保持平衡。'},
+            {title: '灵活调整', desc: '根据状态灵活调整社交强度。'},
+            {title: '发挥优势', desc: '利用平衡能力，在需要协调的岗位发光。'}
+        ]
+    },
+    '社交型I人': {
+        range: [71, 80],
+        icon: '🌗',
+        desc: '你轻度内向，已经具备较强的社交能力。你能享受社交，但仍然需要独处来恢复能量。很多人可能看不出你是I人。',
+        strengths: ['社交能力', '适应性强', '表达清晰', '善于协调', '情商高'],
+        weaknesses: ['容易疲劳', '假装外向', '能量消耗', '有时迷茫', '边界不清'],
+        careers: ['市场营销', '咨询顾问', '销售', '公关', '项目管理'],
+        actionPlan: {
+            title: '社交型I人的30天真实自我计划',
+            steps: [
+                '第1-10天：停止"假装外向"，允许自己在熟人面前展现I人一面。',
+                '第11-20天：建立社交能量预算，每周社交不超过X小时。',
+                '第21-30天：向亲近的人坦诚你的I人属性，寻求理解。'
+            ]
+        },
+        communication: [
+            {scene: '职场表现', wrong: '（一直假装很外向，内心疲惫）', right: '我今天状态不太好，能否改天再讨论？（真实表达）'},
+            {scene: '朋友聚会', wrong: '（勉强成为气氛担当，回家崩溃）', right: '你们聊，我休息一下。（允许自己退出）'}
+        ],
+        books: ['《假性外向者》', '《做自己就好》', '《不完美，才美》'],
+        courses: ['得到《如何做自己》', 'TED《脆弱的力量》', '网易云课堂《自我认知》'],
+        tools: ['Notion (能量管理)', 'Habitica (习惯养成)', 'Headspace (冥想)'],
+        donts: [
+            {title: '假装外向', desc: '长期假装会导致身份危机和burnout。'},
+            {title: '过度消耗', desc: '不要透支能量来维持"外向"人设。'},
+            {title: '否定自我', desc: '不要因为"看起来像E人"就否定I人属性。'}
+        ],
+        dos: [
+            {title: '接纳自己', desc: '接受你是I人的事实，这是你的本质。'},
+            {title: '设定边界', desc: '明确告诉他人你的能量需求。'},
+            {title: '真实表达', desc: '在安全的关系中，展现真实的I人一面。'}
+        ]
+    },
+    '中间人': {
+        range: [81, 90],
+        icon: '⚖️',
+        desc: '你接近I/E的中点，略偏I人。你能灵活切换社交和独处模式，但整体上还是从独处中获得更多能量。',
+        strengths: ['灵活性强', '适应力好', '平衡能力', '换位思考', '沟通流畅'],
+        weaknesses: ['容易迷茫', '身份模糊', '能量不稳', '难以选择', '压力大'],
+        careers: ['人力资源', '教育培训', '心理咨询', '中层管理', '协调员'],
+        actionPlan: {
+            title: '中间人的30天自我探索计划',
+            steps: [
+                '第1-10天：记录每天的能量来源，是社交多还是独处多。',
+                '第11-20天：尝试连续3天偏I模式，再连续3天偏E模式，对比感受。',
+                '第21-30天：找到你的"基准状态"，即最舒适的I/E平衡点。'
+            ]
+        },
+        communication: [
+            {scene: '职场定位', wrong: '（不断切换角色，感到疲惫）', right: '我擅长协调，可以做桥梁角色。（发挥优势）'},
+            {scene: '自我介绍', wrong: '我也不知道我是I人还是E人...（迷茫）', right: '我比较灵活，能适应不同场合。（自信表达）'}
+        ],
+        books: ['《安静的力量》', '《外向性格的竞争力》', '《做自己》'],
+        courses: ['得到《自我认知》', '混沌大学《个人定位》', 'Coursera《Personality Psychology》'],
+        tools: ['Notion (自我追踪)', 'RescueTime (时间分析)', 'Day One (反思日记)'],
+        donts: [
+            {title: '过度纠结', desc: '不要纠结于"我到底是I还是E"，接受灵活性。'},
+            {title: '失去中心', desc: '不要因为灵活而失去自我，要有核心定位。'},
+            {title: '过度切换', desc: '频繁切换模式会消耗大量能量。'}
+        ],
+        dos: [
+            {title: '接纳特质', desc: '接受你的灵活性是优势，不是缺陷。'},
+            {title: '找到平衡', desc: '通过记录找到你的最佳I/E比例。'},
+            {title: '发挥桥梁', desc: '在需要协调I/E群体的岗位发光。'}
+        ]
+    },
+    '灵活派': {
+        range: [91, 100],
+        icon: '⚖️',
+        desc: '你接近I/E的中点，略偏E人。你能享受社交，也能享受独处。你的能量来源比较平衡，社交和独处都能让你充电。',
+        strengths: ['灵活自如', '适应性强', '社交能力', '独处能力', '平衡心态'],
+        weaknesses: ['有时矛盾', '难以定位', '能量波动', '选择困难', '需要调整'],
+        careers: ['自由职业', '创业者', '顾问', '教练', '斜杠青年'],
+        actionPlan: {
+            title: '灵活派的30天优势发挥计划',
+            steps: [
+                '第1-10天：识别你在不同场景下的自然倾向（工作时/休息时）。',
+                '第11-20天：主动选择适合当下状态的活动，不被他人期待绑架。',
+                '第21-30天：建立"能量自由"系统，随时切换社交/独处模式。'
+            ]
+        },
+        communication: [
+            {scene: '职场角色', wrong: '（被动接受各种角色，感到疲惫）', right: '这个项目我适合做协调，那个我更擅长独立完成。'},
+            {scene: '生活安排', wrong: '（随波逐流，没有主见）', right: '今天我想独处，明天我们一起玩。（主动选择）'}
+        ],
+        books: ['《灵活的思维》', '《反脆弱》', '《斜杠创业家》'],
+        courses: ['混沌大学《创新思维》', '得到《个人商业模式》', 'Coursera《Flexible Thinking》'],
+        tools: ['Notion (全能工具)', 'Miro (灵活协作)', 'Toggl (时间自由)'],
+        donts: [
+            {title: '被动适应', desc: '不要总是被动适应他人，要主动选择。'},
+            {title: '失去自我', desc: '灵活不等于没有立场和原则。'},
+            {title: '忽视需求', desc: '要及时识别当下真正的能量需求。'}
+        ],
+        dos: [
+            {title: '主动选择', desc: '根据状态主动选择社交或独处。'},
+            {title: '发挥优势', desc: '在需要灵活性的工作中大放异彩。'},
+            {title: '保持平衡', desc: '定期检查I/E平衡，避免长期偏向一端。'}
+        ]
+    },
+    '温和E人': {
+        range: [101, 110],
+        icon: '☀️',
+        desc: '你轻度外向，从社交中获得能量，但也需要偶尔的独处时间。你不会像深度E人那样极度渴望社交。',
+        strengths: ['社交能力', '亲和力强', '表达流畅', '团队协作', '情绪稳定'],
+        weaknesses: ['偶尔疲惫', '需要平衡', '有时内耗', '边界模糊', '能量波动'],
+        careers: ['教师', '客服经理', '团队领导', '社工', '培训师'],
+        actionPlan: {
+            title: '温和E人的30天能量管理计划',
+            steps: [
+                '第1-10天：记录社交后的感受，识别哪些社交真正带来能量。',
+                '第11-20天：学会拒绝低质量社交，只参加真正想去的活动。',
+                '第21-30天：安排定期的独处时间，保持能量平衡。'
+            ]
+        },
+        communication: [
+            {scene: '职场社交', wrong: '（参加所有活动，有时感到疲惫）', right: '这个我就不去了，我需要休息一下。'},
+            {scene: '朋友聚会', wrong: '（勉强当气氛担当）', right: '今天我比较安静，你们聊。（真实表达）'}
+        ],
+        books: ['《外向者优势》', '《社交的艺术》', '《高情商沟通》'],
+        courses: ['得到《沟通的方法》', 'Coursera《Social Skills》', '网易云课堂《人际关系》'],
+        tools: ['Meetup (社交活动)', 'LinkedIn (职业社交)', 'Notion (日程管理)'],
+        donts: [
+            {title: '过度社交', desc: '不要为了维持"E人"形象而过度社交。'},
+            {title: '忽视休息', desc: '也需要定期的独处时间来恢复。'},
+            {title: '质量不控', desc: '不是所有社交都有价值，要筛选。'}
+        ],
+        dos: [
+            {title: '选择性社交', desc: '只参加真正有价值的社交活动。'},
+            {title: '保护能量', desc: '安排定期的休息和独处时间。'},
+            {title: '深度连接', desc: '在数量基础上，也追求质量。'}
+        ]
+    },
+    '活力E人': {
+        range: [111, 120],
+        icon: '☀️',
+        desc: '你偏外向，从社交中获得大量能量。你喜欢热闹，享受与人互动，但也能接受偶尔的独处。',
+        strengths: ['社交达人', '活力充沛', '感染力强', '表达能力', '领导力'],
+        weaknesses: ['难以独处', '有时浮躁', '深度不足', '冲动', '注意力分散'],
+        careers: ['销售总监', '市场营销', '公关经理', '活动策划', '主持人'],
+        actionPlan: {
+            title: '活力E人的30天深度培养计划',
+            steps: [
+                '第1-10天：每天安排30分钟安静独处，练习深度思考。',
+                '第11-20天：选择一个话题深入研究，输出3000字文章。',
+                '第21-30天：建立"深度-社交"循环，不只是表面互动。'
+            ]
+        },
+        communication: [
+            {scene: '职场会议', wrong: '（滔滔不绝，占用太多时间）', right: '我简要说3点...（控制时长，给他人空间）'},
+            {scene: '朋友关系', wrong: '（泛泛之交很多，深交很少）', right: '我们找时间深聊一下？（建立深度连接）'}
+        ],
+        books: ['《深度工作》', '《刻意练习》', '《安静的力量》'],
+        courses: ['得到《深度思考》', '混沌大学《战略思维》', 'Coursera《Critical Thinking》'],
+        tools: ['Forest (专注)', 'Notion (知识管理)', 'RescueTime (时间管理)'],
+        donts: [
+            {title: '过度社交', desc: '不是所有时间都要用来社交，需要深度时间。'},
+            {title: '浮于表面', desc: '不要满足于泛泛之交，要建立深度关系。'},
+            {title: '忽视独处', desc: '也需要独处来沉淀和成长。'}
+        ],
+        dos: [
+            {title: '培养深度', desc: '每周至少一次深度学习或思考。'},
+            {title: '质量优先', desc: '在数量基础上，也追求质量。'},
+            {title: '学会倾听', desc: '不只是表达，更要学会倾听。'}
+        ]
+    },
+    '社交达人': {
+        range: [121, 130],
+        icon: '☀️',
+        desc: '你高度外向，极度渴望社交互动。你从人群中获得巨大能量，独处会让你感到不安和无聊。',
+        strengths: ['社交能力', '影响力强', '活力四射', '感染力', '领导力'],
+        weaknesses: ['难以独处', '深度不足', '冲动决策', '注意力分散', '依赖他人'],
+        careers: ['网红', '演员', '销售冠军', '政治家', 'CEO'],
+        actionPlan: {
+            title: '社交达人的30天平衡计划',
+            steps: [
+                '第1-10天：每天强制1小时独处，关闭所有社交软件。',
+                '第11-20天：学习冥想和深度工作，培养专注力。',
+                '第21-30天：建立"独处-社交"循环，不过度依赖社交。'
+            ]
+        },
+        communication: [
+            {scene: '职场表现', wrong: '（过度社交，忽视深度工作）', right: '上午我专注工作，下午我们一起讨论。（平衡）'},
+            {scene: '个人成长', wrong: '（只通过社交学习，缺乏深度）', right: '我需要独处时间来消化和思考。（自我觉察）'}
+        ],
+        books: ['《深度工作》', '《安静》', '《刻意练习》'],
+        courses: ['得到《如何深度思考》', 'Coursera《Mindfulness》', '混沌大学《战略思维》'],
+        tools: ['Forest (强制专注)', 'Freedom (屏蔽社交)', 'Calm (冥想)'],
+        donts: [
+            {title: '过度依赖', desc: '不要过度依赖社交来定义自我价值。'},
+            {title: '逃避独处', desc: '学会与自己相处，这是成长的必经之路。'},
+            {title: '忽视深度', desc: '表面的热闹不能代替深度的成长。'}
+        ],
+        dos: [
+            {title: '培养独处', desc: '每天至少1小时独处，学会享受。'},
+            {title: '深度学习', desc: '选择1-2个领域深耕，建立专业度。'},
+            {title: '质量社交', desc: '减少泛泛之交，建立深度关系。'}
+        ]
+    },
+    '深度E人': {
+        range: [131, 150],
+        icon: '☀️',
+        desc: '你极度外向，完全从社交中获得能量。独处对你来说是痛苦的，你需要持续的人际互动来保持活力。',
+        strengths: ['超强社交', '影响力', '感染力', '领导力', '活力无限'],
+        weaknesses: ['无法独处', '深度缺失', '过度依赖', '冲动', '浮躁'],
+        careers: ['超级网红', '顶级销售', '政治领袖', '娱乐明星', '创业领袖'],
+        actionPlan: {
+            title: '深度E人的30天自我修炼计划',
+            steps: [
+                '第1-10天：每天强制2小时完全独处，学习与自己相处。',
+                '第11-20天：开始冥想练习，每天10分钟，培养内在力量。',
+                '第21-30天：选择一个深度话题研究，输出5000字报告。'
+            ]
+        },
+        communication: [
+            {scene: '职场发展', wrong: '（只靠社交，缺乏硬实力）', right: '我在保持社交优势的同时，也在深耕专业。'},
+            {scene: '个人关系', wrong: '（泛泛之交无数，深交为零）', right: '我想和你建立更深的连接。（深度关系）'}
+        ],
+        books: ['《深度工作》', '《安静》', '《独处的艺术》'],
+        courses: ['得到《深度思考》', 'Coursera《Meditation》', '混沌大学《哲学思考》'],
+        tools: ['Forest (强制专注)', 'Freedom (断网工具)', 'Headspace (冥想)'],
+        donts: [
+            {title: '完全依赖', desc: '不要让社交成为唯一的能量来源。'},
+            {title: '逃避成长', desc: '深度成长需要独处和沉淀。'},
+            {title: '表面繁华', desc: '表面的热闹不能掩盖内在的空虚。'}
+        ],
+        dos: [
+            {title: '强制独处', desc: '每天至少2小时独处，这是成长的必需。'},
+            {title: '建立深度', desc: '在某个领域建立真正的专业度。'},
+            {title: '内在修炼', desc: '通过冥想、阅读等培养内在力量。'}
+        ]
+    },
+    '独处型E人': {
+        range: null, // 特殊亚型，根据其他维度判断
+        icon: '🌓',
+        desc: '你是特殊的E人：虽然从社交中获得能量，但你也深刻需要独处时间来思考和创作。你是"需要独处的外向者"。',
 strengths: ['社交能力', '深度思考', '平衡能力', '创造力', '独特视角'],
 weaknesses: ['容易矛盾', '身份迷茫', '能量波动', '难以解释', '被误解'],
 careers: ['作家', '艺术家', '创意总监', '独立创业者', '思想领袖'],
@@ -1751,7 +414,7 @@ actionPlan: {
 title: '独处型E人的30天自我接纳计划',
 steps: [
 '第1-10天：接受你的双重属性，这不是矛盾而是优势。',
-'第11-20天：向亲近的人解释你的特质，寻求理解。',
+'在安全关系中展现真实I人一面，不再假装。',
 '第21-30天：建立"社交-独处"循环，两者都是必需的。'
 ]
 },
@@ -1856,8 +519,10 @@ function verifyCard() {
     const errorDiv = document.getElementById('errorMessage');
     const cardCode = cardInput.value.trim().toUpperCase();
     
+    // 检查万能码
     if (cardCode === MASTER_CODE) {
         currentCard = MASTER_CODE;
+        errorDiv.style.display = 'none';
         showTestPage();
         return;
     }
@@ -1874,11 +539,13 @@ function verifyCard() {
         return;
     }
     
+    // 验证卡号和设备绑定（本地存储模拟）
     const deviceId = getDeviceFingerprint();
     let cards = JSON.parse(localStorage.getItem('ieCards') || '[]');
     let card = cards.find(c => c.code === cardCode);
     
     if (!card) {
+        // 如果卡号不存在，则将其视为新卡并绑定到当前设备
         card = {
             code: cardCode,
             deviceId: deviceId,
@@ -1888,6 +555,7 @@ function verifyCard() {
         };
         cards.push(card);
     } else {
+        // 如果卡号已存在，检查设备绑定
         if (card.deviceId && card.deviceId !== deviceId) {
             errorDiv.textContent = '该卡号已在其他设备使用，无法在本设备使用';
             errorDiv.style.display = 'block';
@@ -1906,6 +574,7 @@ function verifyCard() {
     localStorage.setItem('ieCards', JSON.stringify(cards));
     
     currentCard = card;
+    errorDiv.style.display = 'none'; // 确保清除错误信息
     showTestPage();
 }
     
@@ -1932,8 +601,7 @@ function renderQuestion() {
             optionDiv.classList.add('selected');
         }
         optionDiv.textContent = option;
-        // 使用 selectOption 函数处理点击事件
-        optionDiv.onclick = () => selectOption(index + 1); 
+        optionDiv.onclick = () => selectOption(index + 1);
         optionsContainer.appendChild(optionDiv);
     });
     
@@ -2025,7 +693,6 @@ function calculateResult() {
             if (q.dimension === key) {
                 let score = answers[i] || 3;
                 
-                // 10道题，每题 1-5 分，最大 I/E 分均为 50
                 if (!q.reverse) { // I 倾向问题
                     dimI_sum += score; 
                     dimE_sum += (6 - score);
@@ -2060,11 +727,11 @@ function calculateResult() {
             // 特殊亚型逻辑 (Ambivert/特殊亚型)
             const [energyScore, socialScore, expressionScore, decisionScore] = normalizedScoresFinal;
             
-            // 独处型E人 (E总分高, 但能量/决策 I 倾向)
+            // 独处型E人 (E总分高, 但能量/决策 I 倾向: < 12.5)
             if (displayScore > 100 && energyScore < 12.5 && decisionScore < 12.5) {
                  subtype = '独处型E人';
             } 
-            // 表演型I人 (I总分低, 但社交/表达 E 倾向)
+            // 表演型I人 (I总分低, 但社交/表达 E 倾向: > 12.5)
             else if (displayScore < 80 && socialScore > 12.5 && expressionScore > 12.5) {
                  subtype = '表演型I人';
             }
