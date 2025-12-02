@@ -2016,111 +2016,145 @@ dos: [
             calculateResult();
         }
     }
-   function calculateResult() {
-    let totalI_Score = 0; // 计分全部转向 I 维度
-    let totalE_Score = 0; // 计分全部转向 E 维度 (暂不使用，但保留逻辑)
+  function calculateResult() {
+    let rawTotalScore = 0; // 用于计算总分的原始分 (40-200，120为中性点)
     
-    // I 题和 E 题的总数为 40，总分范围 40-200，中线 120
-    
-    questions.forEach((q, i) => {
-        let score = answers[i]; // 原始选择分数 1-5
-        
-        // 确保答案已经被选择
-        if (score === 0) {
-            score = 3; // 默认中性分 3
-        }
-
-        // 1. 计算 I 人得分: I 倾向的题，得分越高越 I
-        if (!q.reverse) {
-            totalI_Score += score; // 1 (不像) 到 5 (很像)
-        } else {
-            totalI_Score += (6 - score); // 5 (不像) 到 1 (很像)
-        }
-        
-        // 2. 计算 E 人得分 (反之): E 倾向的题，得分越高越 E
-        if (q.reverse) {
-            totalE_Score += score; // 1 (不像) 到 5 (很像)
-        } else {
-            totalE_Score += (6 - score); // 5 (不像) 到 1 (很像)
-        }
-    });
-
-    // 重新设计总分：我们使用 I/E 差值来拉开差距，并映射到 30-150 的显示范围
-    // I/E 差值范围：(40*1) - (40*5) = -160 到 (40*5) - (40*1) = +160
-    
-    const maxScore = 200; // I/E 都是 40*5
-    const minScore = 40; // I/E 都是 40*1
-    
-    // 使用 I 人得分和 E 人得分的比重来计算一个更明显的总分 (范围 40 - 200)
-    // totalScore 接近 maxScore 时为 E 人，接近 minScore 时为 I 人
-    const finalTotalScore = totalE_Score + (200 - totalI_Score); // 简化公式：高 E 人得分 + 低 I 人得分
-    
-    // 映射到 30-150 的显示分数：(分数 - 最小值) / (总范围) * (目标范围) + 目标最小值
-    // 实际总分范围是 40-200 (共 160)
-    // 目标显示范围是 30-150 (共 120)
-    
-    const displayScore = Math.round(((finalTotalScore - 40) / 160) * 120 + 30); 
-    
-    // ... (后续的维度得分和亚型分类逻辑不变)
-    
-    // 计算各维度得分 (使用 totalI_Score 和 totalE_Score 来计算，以拉开维度差距)
-    const dimensionScores = {
+    // 维度得分 (0-50, 25为中性点)
+    const rawDimensionScores = {
         energy: 0,
         social: 0,
         expression: 0,
         decision: 0
     };
-    
+
     questions.forEach((q, i) => {
-        let score = answers[i];
-        if (q.reverse) {
-            // E 题：得分越高越 E (5分)
-        } else {
-            // I 题：得分越高越 I (5分)
+        let score = answers[i] || 3; // 确保有默认值
+        
+        // 1. 计算原始总分 (RawTotalScore): 计分逻辑：I人倾向的题分越高，最终分数越低
+        let invertedScore = score;
+        if (!q.reverse) {
+            // I 人倾向的题：选 5 (非常像我/I人) 时，分值应为 1 (I人低分)
+            invertedScore = 6 - score;
+        } 
+        rawTotalScore += invertedScore;
+        
+        // 2. 计算维度分数：计分逻辑：得分越高，代表越倾向 E 人
+        let dimScoreForE = score;
+        if (!q.reverse) {
+            // I 人倾向的题：选 5 (非常像我/I人) 时，得分应为 1
+            dimScoreForE = 6 - score;
         }
-        
-        // 我们利用原始的 1-5 分和反转后的 1-5 分，将分数集中到 I/E 偏向上
-        // 这里使用原始维度逻辑，但使用 totalI_Score 和 totalE_Score 的平均差来修正
-        
-        // 重新使用原始维度计分，但确保使用反向计分
-        let dimScore = answers[i];
-        if (q.reverse) dimScore = 6 - dimScore; // E 人问题反向计分
-        
-        // 维度得分越高越 I 人
-        dimensionScores[q.dimension] += dimScore;
+        rawDimensionScores[q.dimension] += dimScoreForE;
     });
 
-    // 原始维度计分逻辑会导致偏差，我们重新使用 I/E 倾向计分：
-    const dimNames = ['energy', 'social', 'expression', 'decision'];
-    const newDimScores = {
-        energy: { I: 0, E: 0 },
-        social: { I: 0, E: 0 },
-        expression: { I: 0, E: 0 },
-        decision: { I: 0, E: 0 }
-    };
+    // 重新设计总分：我们使用原始总分 (RawTotalScore, 40-200) 来计算最终得分 (30-150)。
+    // 逻辑：RawTotalScore 越低 (越倾向 I)，DisplayScore 越低。
+    // RawTotalScore 范围 40 (极I) 到 200 (极E)
+    // 目标 DisplayScore 范围 30 (极I) 到 150 (极E)
+    
+    // 错误修正: 您的原始题库设计，RawTotalScore 越高，代表越倾向 E 人
+    // 原因是：所有的 reverse: true (E 人题) 和反转后的 reverse: false (I 人题) 都是 E 倾向高分
+    // 我们必须修正题库设计缺陷导致的 RawTotalScore 偏差。
+
+    // 假设 RawTotalScore 越高，代表越倾向 E 人（因为您全选 1 得到 120，全选 5 得到 120，这证明您的题库设计逻辑是混乱的）
+    // 让我们使用最简单的：I人得分 - E人得分 来确定偏向性。
+    
+    let scoreI_sum = 0;
+    let scoreE_sum = 0;
 
     questions.forEach((q, i) => {
         let score = answers[i] || 3;
         
-        if (!q.reverse) { // I 题 (喜欢独处)
-            newDimScores[q.dimension].I += score; // I 分高
-            newDimScores[q.dimension].E += (6 - score); // E 分低
-        } else { // E 题 (喜欢聚会)
-            newDimScores[q.dimension].I += (6 - score); // I 分低
-            newDimScores[q.dimension].E += score; // E 分高
+        if (!q.reverse) { // I 倾向问题 (喜欢独处)
+            scoreI_sum += score; 
+            scoreE_sum += (6 - score);
+        } else { // E 倾向问题 (喜欢聚会)
+            scoreI_sum += (6 - score);
+            scoreE_sum += score;
         }
     });
 
-    // 标准化到 0-25 分 (0=I人，25=E人)
-    const normalizedScores = dimNames.map(key => {
-        const I_score = newDimScores[key].I; // Max 25
-        const E_score = newDimScores[key].E; // Max 25
-        // (E_score / (I_score + E_score)) * 50 -> 0-50, 然后 / 2 -> 0-25
-        const finalDimScore = Math.round((E_score / (I_score + E_score)) * 25);
-        return finalDimScore;
-    });
+    // ScoreI_sum (Max 200) vs ScoreE_sum (Max 200)
+    // 决定最终显示分数 DisplayScore (30-150)
+    // 目标: I 越高 -> DisplayScore 越低
+    //       E 越高 -> DisplayScore 越高
+
+    // 新的计算总分逻辑 (40-200, 120为中性点)
+    // 我们用 E 倾向总分减去 I 倾向总分的差值来衡量偏向性 (范围 -160 到 +160)
+    const difference = scoreE_sum - scoreI_sum;
+    const minDiff = -160;
+    const maxDiff = 160;
     
-    // ... (亚型判断逻辑不变，使用 displayScore 和 normalizedScores)
+    // 将差值 (-160到160) 重新映射回 30-150 的显示范围
+    const displayScore = Math.round(((difference - minDiff) / (maxDiff - minDiff)) * (150 - 30) + 30); // 正确的线性映射公式
+
+    // 维度分数 (0-25, 0=I, 25=E)
+    const normalizedScores = Object.keys(rawDimensionScores).map(key => {
+        const i_score = rawDimensionScores[key]; // I 倾向分数
+        const e_score = rawDimensionScores[key]; // E 倾向分数
+        
+        // 重新计算维度I/E分数 (这里简化为只用上面算出的 I_sum/E_sum 比例来计算)
+        // 确保维度得分能反映出 I/E 倾向
+        
+        const dimIndex = dimNames.indexOf(key);
+        let dimI_sum = 0;
+        let dimE_sum = 0;
+
+        questions.forEach((q, i) => {
+            if (q.dimension === key) {
+                let score = answers[i] || 3;
+                if (!q.reverse) { // I 题 (喜欢独处)
+                    dimI_sum += score; 
+                    dimE_sum += (6 - score);
+                } else { // E 题 (喜欢聚会)
+                    dimI_sum += (6 - score);
+                    dimE_sum += score;
+                }
+            }
+        });
+        
+        // 维度分数 Max 50, Min 10. (中线 30)
+        // 标准化到 0-25 分 (0=I人，25=E人)
+        
+        if (dimI_sum + dimE_sum === 0) return 12.5; // 避免除零
+
+        // E 倾向比例 * 25
+        const finalDimScore = Math.round((dimE_sum / (dimI_sum + dimE_sum)) * 50); // 0-50分
+        return finalDimScore; 
+    });
+
+
+    // 修正: 维度分数标准化到 0-25分 (0=I人，25=E人)
+
+    const normalizedScoresFinal = dimNames.map(key => {
+        let dimI_sum = 0;
+        let dimE_sum = 0;
+
+        questions.forEach((q, i) => {
+            if (q.dimension === key) {
+                let score = answers[i] || 3;
+                
+                // 10道题，每题 1-5 分，最大 I 分 50，最大 E 分 50
+                if (!q.reverse) { // I 倾向问题
+                    dimI_sum += score; 
+                    dimE_sum += (6 - score);
+                } else { // E 倾向问题
+                    dimI_sum += (6 - score);
+                    dimE_sum += score;
+                }
+            }
+        });
+        
+        // 映射到 0-25 (0=I, 25=E)
+        // 差值 (E - I) / 40 * 12.5 + 12.5
+        const diff = dimE_sum - dimI_sum; // -40 到 +40
+        
+        const normalizedScore = Math.round(((diff + 40) / 80) * 25);
+        return normalizedScore;
+    });
+
+
+    // ... (亚型判断逻辑保持不变，使用 displayScore 和 normalizedScoresFinal)
     
     // 确定类型 (使用 displayScore 30-150)
     let subtype = null;
@@ -2137,16 +2171,13 @@ dos: [
     if (!subtype) {
         // 中性范围（81-100分）
         if (displayScore >= 81 && displayScore <= 100) {
-            // 判断中间人（略偏I）和灵活派（略偏E）
-            subtype = displayScore <= 90 ? '中间人' : '灵活派'; 
+            subtype = displayScore <= 90 ? '中间人' : '灵活派'; 
         } else {
             // 检查特殊亚型逻辑: 跨越I/E的类型
-            const [energyScore, socialScore, expressionScore, decisionScore] = normalizedScores;
+            const [energyScore, socialScore, expressionScore, decisionScore] = normalizedScoresFinal;
             
-            // 独处型E人 (总分偏E, 但能量/决策偏I)
             if (displayScore > 100 && energyScore < 12.5 && decisionScore < 12.5) {
                  subtype = '独处型E人';
-            // 表演型I人 (总分偏I, 但社交/表达偏E)
             } else if (displayScore < 80 && socialScore > 12.5 && expressionScore > 12.5) {
                  subtype = '表演型I人';
             }
@@ -2157,14 +2188,14 @@ dos: [
     if (!subtype) {
         if (displayScore < 50) subtype = '深度I人';
         else if (displayScore > 130) subtype = '深度E人';
-        else subtype = '灵活派'; // 最终保底
+        else subtype = '灵活派'; 
     }
     
     const subtypeData = ieSubtypes[subtype];
     
     sessionStorage.setItem('testResult', JSON.stringify({
         totalScore: displayScore,
-        dimensionScores: normalizedScores,
+        dimensionScores: normalizedScoresFinal, // 使用修正后的维度分
         subtype: subtype,
         icon: subtypeData.icon,
         desc: subtypeData.desc
@@ -2523,6 +2554,7 @@ if (reportData.communication && reportData.communication.length > 0) {
 </script>
 </body>
 </html>
+
 
 
 
