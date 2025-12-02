@@ -1242,14 +1242,14 @@ var _hmt = _hmt || [];
                     </div>
                     <div class="subtype-item">
                         <div class="subtype-number">类型8</div>
-                        <div class="subtype-name">活力E人</div>
-                        <div class="subtype-score">111-120分 | 偏外向</div>
-                    </div>
+                    <div class="subtype-name">活力E人</div>
+                    <div class="subtype-score">111-115分 | 偏外向</div> 
+                    </div>
                     <div class="subtype-item">
                         <div class="subtype-number">类型9</div>
-                        <div class="subtype-name">社交达人</div>
-                        <div class="subtype-score">121-130分 | 高度外向</div>
-                    </div>
+                    <div class="subtype-name">社交达人</div>
+                    <div class="subtype-score">116-135分 | 高度外向</div> 
+                    </div>
                     <div class="subtype-item">
                         <div class="subtype-number">类型10</div>
                         <div class="subtype-name">深度E人</div>
@@ -1690,7 +1690,7 @@ var _hmt = _hmt || [];
                 ]
             },
             '活力E人': {
-                range: [111, 120],
+                range: [111, 115],
                 icon: '☀️',
                 desc: '你偏外向，从社交中获得大量能量。你喜欢热闹，享受与人互动，但也能接受偶尔的独处。',
                 strengths: ['社交达人', '活力充沛', '感染力强', '表达能力', '领导力'],
@@ -1723,7 +1723,7 @@ var _hmt = _hmt || [];
                 ]
             },
             '社交达人': {
-                range: [121, 130],
+                range: [121, 135],
                 icon: '☀️',
                 desc: '你高度外向，极度渴望社交互动。你从人群中获得巨大能量，独处会让你感到不安和无聊。',
                 strengths: ['社交能力', '影响力强', '活力四射', '感染力', '领导力'],
@@ -1756,7 +1756,7 @@ var _hmt = _hmt || [];
                 ]
             },
             '深度E人': {
-                range: [131, 150],
+                range: [136, 150],
                 icon: '☀️',
                 desc: '你极度外向，完全从社交中获得能量。独处对你来说是痛苦的，你需要持续的人际互动来保持活力。',
                 strengths: ['超强社交', '影响力', '感染力', '领导力', '活力无限'],
@@ -2192,10 +2192,12 @@ dos: [
         document.getElementById('fullIeIcon').textContent = result.icon;
         document.getElementById('fullIeType').textContent = `${result.subtype} (得分: ${result.totalScore}/150)`;
         
-        // 更新第一部分
-        document.getElementById('coreAnalysis').textContent = reportData.desc;
-        document.getElementById('energyPattern').textContent = `你的能量模式${result.totalScore < 75 ? '偏向内向' : '偏向外向'}。${reportData.desc}`;
-        
+// 更新第一部分
+        document.getElementById('coreAnalysis').textContent = reportData.desc; // 亚型的核心描述
+        
+        // 使用一个通用的能量模式描述（也可以保持原始的，但需要确保原始文本正确）
+        // 这里我们暂时用一个通用的/默认的描述来简化
+        document.getElementById('energyPattern').textContent = reportData.desc; // 暂时用亚型的核心描述替代，防止出错
         // 标记当前亚型
         const subtypeItems = document.querySelectorAll('.subtype-item');
         subtypeItems.forEach(item => {
@@ -2403,4 +2405,8 @@ dos: [
 </script>
 </body>
 </html>
+
+
+
+
 
