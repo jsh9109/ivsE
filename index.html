@@ -1278,7 +1278,7 @@ var _hmt = _hmt || [];
                     </ul>
                 </div>
                 
-                <h4>5种高效沟通话术 (I人专用)</h4>
+<h4 id="communicationTitle">5种高效沟通话术 (I人专用)</h4>
                 <div id="communicationScripts">
                     <p style="background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;">
                         <strong>场景1：拒绝社交邀约</strong><br>
@@ -2249,17 +2249,17 @@ dos: [
         
         // 更新沟通话术
         const communicationScripts = document.getElementById('communicationScripts');
-        communicationScripts.innerHTML = '';
-        reportData.communication.forEach(comm => {
-            const p = document.createElement('p');
-            p.style.cssText = 'background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;';
-            p.innerHTML = `
-                <strong>场景: ${comm.scene}</strong><br>
-                ❌ ${comm.wrong}<br>
-                ✅ ${comm.right}
-            `;
-            communicationScripts.appendChild(p);
-        });
+communicationScripts.innerHTML = '';
+reportData.communication.forEach(comm => {
+    const p = document.createElement('p');
+    p.style.cssText = 'background: #E1F5FE; padding: 15px; border-radius: 8px; color: #0277BD; margin-top: 15px;';
+    p.innerHTML = `
+        <strong>场景: ${comm.scene}</strong><br>
+        ❌ ${comm.wrong}<br>
+        ✅ ${comm.right}
+    `;
+    communicationScripts.appendChild(p);
+});
         
         // 更新资源包
         document.getElementById('bookList').innerHTML = reportData.books.map((b, i) => `${i+1}. ${b}`).join('<br>');
@@ -2432,6 +2432,7 @@ dos: [
 </script>
 </body>
 </html>
+
 
 
 
